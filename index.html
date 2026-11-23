@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeoMaster VN - Tổng Hợp Kiến Thức Hình Học Lớp 6 - 12 (GDPT 2018)</title>
+    <title>GeoMaster VN - Hệ Thống Kiến Thức Hình Học Lớp 6 - 12 (GDPT 2018)</title>
     
-    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <!-- Google Fonts: Be Vietnam Pro & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,18 +18,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            900: '#1e3a8a',
-                        }
+                        sans: ['"Be Vietnam Pro"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
                     }
                 }
             }
@@ -45,38 +35,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* Tùy chỉnh thanh cuộn và hiệu ứng mượt mà */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(156, 163, 175, 0.5);
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(107, 114, 128, 0.8);
-        }
-        .katex-display {
-            margin: 0.5em 0 !important;
-            overflow-x: auto;
-            overflow-y: hidden;
-        }
-        canvas {
-            touch-action: none; /* Ngăn cuộn trang khi thao tác chạm trên canvas */
-        }
-        /* Hiệu ứng chế độ trình chiếu */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.45); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(107, 114, 128, 0.75); }
+        .katex-display { margin: 0.45em 0 !important; overflow-x: auto; overflow-y: hidden; }
+        canvas { touch-action: none; }
+        /* Chế độ trình chiếu lớp học */
         body.presentation-mode #sidebar,
-        body.presentation-mode #top-header-extras {
-            display: none !important;
-        }
-        body.presentation-mode #main-content {
-            max-width: 100% !important;
-            padding: 1.5rem 2.5rem !important;
-        }
+        body.presentation-mode #top-header-extras { display: none !important; }
+        body.presentation-mode #main-content { max-width: 100% !important; padding: 1.5rem 2.5rem !important; }
+        input[type="number"]::-webkit-inner-spin-button { opacity: 1; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
@@ -84,7 +53,7 @@
     <!-- HEADER BAR -->
     <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3">
         <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-3">
-            <!-- Logo & Mobile Menu Button -->
+            <!-- Logo & Mobile Menu -->
             <div class="flex items-center gap-3">
                 <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200" title="Mở danh mục">
                     <i data-lucide="menu" class="w-5 h-5"></i>
@@ -95,30 +64,27 @@
                     </div>
                     <div>
                         <h1 class="font-extrabold text-lg tracking-tight leading-none text-slate-900 dark:text-white">GeoMaster <span class="text-blue-600 dark:text-blue-400">VN</span></h1>
-                        <p class="text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">Hình học Lớp 6 – 12 • GDPT 2018</p>
+                        <p class="text-[11px] font-medium text-slate-500 dark:text-slate-400 mt-0.5">Hình học Lớp 6 – 12 • Kết nối tri thức</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Thanh Tìm Kiếm Nhanh Công Thức (Cheat Sheet Search) -->
+            <!-- Thanh Tìm Kiếm Nhanh Công Thức -->
             <div id="top-header-extras" class="relative flex-1 max-w-md mx-2 order-3 sm:order-2 w-full sm:w-auto">
                 <div class="relative">
                     <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                     <input 
                         type="text" 
                         id="formula-search" 
-                        placeholder="Tra cứu nhanh công thức (VD: Pytago, Côsin, mặt cầu, tích phân...)" 
+                        placeholder="Tra cứu nhanh (VD: giao tuyến, Thalès, mặt cầu, Pytago...)" 
                         class="w-full pl-10 pr-4 py-2 text-sm rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-transparent focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 outline-none transition-all"
                     >
                     <kbd class="hidden md:inline-block absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400">/</kbd>
                 </div>
-                <!-- Dropdown kết quả tìm kiếm nhanh -->
-                <div id="search-results" class="hidden absolute left-0 right-0 mt-2 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-h-96 overflow-y-auto z-50 p-2">
-                    <!-- Kết quả render bằng JS -->
-                </div>
+                <div id="search-results" class="hidden absolute left-0 right-0 mt-2 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-h-96 overflow-y-auto z-50 p-2"></div>
             </div>
 
-            <!-- Nút Chức Năng: Presentation Mode & Dark Mode -->
+            <!-- Nút Trình Chiếu & Dark Mode -->
             <div class="flex items-center gap-2 order-2 sm:order-3">
                 <button id="presentation-btn" class="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold bg-indigo-50 text-indigo-700 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:text-indigo-300 dark:hover:bg-indigo-900/60 border border-indigo-200/60 dark:border-indigo-800/60 transition-all" title="Chế độ trình chiếu bảng tương tác">
                     <i data-lucide="presentation" class="w-4 h-4"></i>
@@ -135,60 +101,49 @@
     <!-- MAIN LAYOUT -->
     <div class="flex-1 max-w-[1600px] w-full mx-auto flex relative">
         
-        <!-- SIDEBAR ĐIỀU HƯỚNG PHÂN CẤP LỚP 6 - 12 -->
-        <aside id="sidebar" class="fixed lg:sticky top-[61px] left-0 z-30 w-72 h-[calc(100vh-61px)] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 overflow-y-auto p-4 transition-transform -translate-x-full lg:translate-x-0 shrink-0">
-            <div class="flex items-center justify-between mb-3 px-2">
+        <!-- SIDEBAR CÂY THƯ MỤC LỚP 6 - 12 -->
+        <aside id="sidebar" class="fixed lg:sticky top-[61px] left-0 z-30 w-76 max-w-[85vw] sm:w-80 h-[calc(100vh-61px)] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 overflow-y-auto p-4 transition-transform -translate-x-full lg:translate-x-0 shrink-0">
+            <div class="flex items-center justify-between mb-3 px-1">
                 <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Chương trình học</span>
-                <span class="text-[11px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 font-medium">7 Khối lớp</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 font-semibold">GDPT 2018</span>
             </div>
             
-            <nav id="grade-tree" class="space-y-2">
-                <!-- Danh sách lớp & chuyên đề được render bằng JS -->
-            </nav>
+            <nav id="grade-tree" class="space-y-2"></nav>
 
-            <!-- Thẻ ghi chú ký hiệu toán học chuẩn -->
+            <!-- Bảng quy ước ký hiệu toán học chuẩn -->
             <div class="mt-6 p-3.5 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50">
                 <h4 class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 mb-2">
-                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500"></i> Quy ước ký hiệu
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-blue-500"></i> Ký hiệu Hình học chuẩn
                 </h4>
-                <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5" id="symbol-legend">
-                    <li>$\triangle ABC$: Tam giác $ABC$</li>
-                    <li>$\widehat{xOy}$: Góc $xOy$</li>
-                    <li>$a \parallel b$ / $a \perp b$: Song song / Vuông góc</li>
-                    <li>$\overrightarrow{AB}$: Vectơ từ $A$ đến $B$</li>
+                <ul class="text-xs text-slate-600 dark:text-slate-400 space-y-1.5">
+                    <li>$A \in (P)$, $d \subset (P)$: Thuộc, nằm trong</li>
+                    <li>$d = (P) \cap (Q)$: Giao tuyến hai mặt phẳng</li>
+                    <li>$a \parallel b$, $(\alpha) \parallel (\beta)$: Quan hệ song song</li>
+                    <li>$a \perp (P)$, $\overrightarrow{AB}$: Vuông góc, vectơ</li>
                 </ul>
             </div>
         </aside>
 
-        <!-- Overlay cho mobile sidebar -->
         <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-20 hidden lg:hidden"></div>
 
-        <!-- KHU VỰC NỘI DUNG CHÍNH (4 THẺ CHUYÊN SÂU) -->
+        <!-- KHU VỰC NỘI DUNG CHÍNH -->
         <main id="main-content" class="flex-1 p-4 sm:p-6 lg:p-8 max-w-full overflow-x-hidden">
             
             <!-- Breadcrumb & Tiêu đề bài học -->
             <div class="mb-6">
                 <div class="flex flex-wrap items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 mb-2">
-                    <span id="lesson-grade-badge" class="px-2.5 py-1 rounded-lg bg-blue-100 dark:bg-blue-900/40">Lớp 8</span>
+                    <span id="lesson-grade-badge" class="px-2.5 py-1 rounded-lg bg-blue-100 dark:bg-blue-900/40">Lớp 11</span>
                     <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
-                    <span id="lesson-category" class="text-slate-500 dark:text-slate-400">Hình học phẳng</span>
+                    <span id="lesson-category" class="text-slate-500 dark:text-slate-400">Chương IV. Quan hệ song song trong không gian</span>
                 </div>
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <h2 id="lesson-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                            Định lý Py-ta-go & Hệ thức lượng trong tam giác vuông
-                        </h2>
-                        <p id="lesson-subtitle" class="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                            Mối liên hệ giữa độ dài ba cạnh, đường cao và hình chiếu trong tam giác vuông.
-                        </p>
-                    </div>
-                </div>
+                <h2 id="lesson-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight"></h2>
+                <p id="lesson-subtitle" class="text-sm text-slate-600 dark:text-slate-400 mt-1"></p>
             </div>
 
-            <!-- LƯỚI 4 THẺ KIẾN THỨC -->
+            <!-- LƯỚI NỘI DUNG CHÍNH -->
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
                 
-                <!-- CỘT TRÁI (7/12): THẺ 1 (Định nghĩa & Định lý) + THẺ 2 (Bảng công thức) + THẺ 4 (Ví dụ mẫu) -->
+                <!-- CỘT TRÁI (7/12): THẺ 1 + THẺ 2 + THẺ 4 + THẺ 5 -->
                 <div class="xl:col-span-7 space-y-6">
                     
                     <!-- THẺ 1: TÓM TẮT ĐỊNH NGHĨA & ĐỊNH LÝ -->
@@ -197,11 +152,9 @@
                             <div class="w-8 h-8 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
                                 <i data-lucide="book-open" class="w-4 h-4"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">1. Tóm tắt Định nghĩa & Định lý</h3>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">1. Kiến thức trọng tâm & Định lý</h3>
                         </div>
-                        <div id="card-definitions" class="space-y-4 text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300">
-                            <!-- Nội dung render từ JS -->
-                        </div>
+                        <div id="card-definitions" class="space-y-3.5 text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300"></div>
                     </section>
 
                     <!-- THẺ 2: BẢNG CÔNG THỨC & KÝ HIỆU ĐÓNG KHUNG -->
@@ -211,16 +164,14 @@
                                 <div class="w-8 h-8 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
                                     <i data-lucide="sigma" class="w-4 h-4"></i>
                                 </div>
-                                <h3 class="text-lg font-bold text-slate-900 dark:text-white">2. Bảng Công Thức Trọng Tâm</h3>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white">2. Ký hiệu & Công thức cốt lõi</h3>
                             </div>
                             <button id="copy-formulas-btn" class="text-xs font-medium px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center gap-1.5 transition-colors">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                                 <span id="copy-status">Chép LaTeX</span>
                             </button>
                         </div>
-                        <div id="card-formulas" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                            <!-- Các thẻ công thức đóng khung render từ JS -->
-                        </div>
+                        <div id="card-formulas" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
                     </section>
 
                     <!-- THẺ 4: VÍ DỤ MẪU & LỜI GIẢI TỪNG BƯỚC -->
@@ -230,57 +181,70 @@
                                 <div class="w-8 h-8 rounded-xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold">
                                     <i data-lucide="lightbulb" class="w-4 h-4"></i>
                                 </div>
-                                <h3 class="text-lg font-bold text-slate-900 dark:text-white">4. Ví dụ Mẫu & Lời Giải Từng Bước</h3>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white">4. Ví dụ Mẫu & Phương pháp giải</h3>
                             </div>
                             <span class="text-xs font-medium px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/50">
-                                Tư duy giải toán
+                                Từng bước chi tiết
                             </span>
                         </div>
-                        
-                        <div id="card-example" class="space-y-4">
-                            <!-- Đề bài & các bước giải render từ JS -->
+                        <div id="card-example" class="space-y-4"></div>
+                    </section>
+
+                    <!-- THẺ 5: TRẮC NGHIỆM KIỂM TRA NHANH -->
+                    <section class="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold">
+                                    <i data-lucide="check-square" class="w-4 h-4"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white">5. Trắc nghiệm Vận dụng nhanh</h3>
+                            </div>
+                            <span id="quiz-score-badge" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                                Chọn đáp án để kiểm tra
+                            </span>
                         </div>
+                        <div id="card-quiz" class="space-y-3"></div>
                     </section>
                 </div>
 
-                <!-- CỘT PHẢI (5/12): THẺ 3 (KHUNG TƯƠNG TÁC TRỰC QUAN CANVAS) -->
+                <!-- CỘT PHẢI (5/12): THẺ 3 (KHUNG TƯƠNG TÁC TRỰC QUAN + BẢNG NHẬP DỮ LIỆU ĐỀ BÀI) -->
                 <div class="xl:col-span-5">
                     <section class="sticky top-[77px] bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center gap-2.5">
                                 <div class="w-8 h-8 rounded-xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">
-                                    <i data-lucide="move" class="w-4 h-4"></i>
+                                    <i data-lucide="sliders" class="w-4 h-4"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">3. Mô Phỏng Trực Quan</h3>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400">Kéo thả các điểm màu xanh/đỏ trên hình để kiểm chứng</p>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">3. Mô Phỏng & Dựng Hình Theo Đề Bài</h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">Nhập số liệu bài toán bên dưới hoặc kéo trực tiếp trên hình</p>
                                 </div>
                             </div>
-                            <button id="reset-canvas-btn" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Đặt lại vị trí ban đầu">
+                            <button id="reset-canvas-btn" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Đặt lại dữ liệu mặc định">
                                 <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                             </button>
                         </div>
 
+                        <!-- BẢNG NHẬP DỮ LIỆU ĐỘNG THEO TỪNG KHỐI LỚP -->
+                        <div id="dynamic-input-panel" class="mb-3.5 p-3.5 rounded-2xl bg-slate-100/90 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/80 space-y-2.5"></div>
+
                         <!-- Vùng chứa HTML5 Canvas -->
-                        <div class="relative w-full aspect-square max-h-[420px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950" id="canvas-container">
+                        <div class="relative w-full aspect-square max-h-[390px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950" id="canvas-container">
                             <canvas id="geometry-canvas" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
                             
-                            <!-- Nhãn hướng dẫn góc trên -->
                             <div class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-white/85 dark:bg-slate-900/85 backdrop-blur-xs text-[11px] font-medium text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/80 pointer-events-none flex items-center gap-1.5">
                                 <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                                <span id="canvas-hint">Kéo các đỉnh để thay đổi hình dạng</span>
+                                <span id="canvas-hint">Nhập số liệu hoặc kéo thả trên hình</span>
                             </div>
                         </div>
 
-                        <!-- Bảng thông số thời gian thực đo được từ Canvas -->
-                        <div class="mt-4 p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80">
+                        <!-- Bảng thông số thời gian thực -->
+                        <div class="mt-3.5 p-3.5 rounded-2xl bg-slate-100/80 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80">
                             <div class="flex items-center justify-between mb-2">
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Thông số đo thời gian thực</span>
-                                <span class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">● Live Data</span>
+                                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Kết quả tính toán tự động</span>
+                                <span class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">● Live Solver</span>
                             </div>
-                            <div id="live-metrics" class="grid grid-cols-2 gap-2.5 text-xs sm:text-sm font-mono">
-                                <!-- Các chỉ số cập nhật liên tục khi kéo chuột -->
-                            </div>
+                            <div id="live-metrics" class="grid grid-cols-2 gap-2 text-xs sm:text-sm font-mono"></div>
                         </div>
                     </section>
                 </div>
@@ -289,157 +253,94 @@
         </main>
     </div>
 
-    <!-- JAVASCRIPT LOGIC: DỮ LIỆU CHƯƠNG TRÌNH 6-12 + KATEX + INTERACTIVE CANVAS -->
+    <!-- JAVASCRIPT LOGIC: DỮ LIỆU CHƯƠNG TRÌNH LỚP 6 - 12 & BỘ GIẢI HÌNH HỌC TƯƠNG TÁC -->
     <script>
-        /**
-         * CƠ SỞ DỮ LIỆU KIẾN THỨC HÌNH HỌC LỚP 6 - 12 (CHƯƠNG TRÌNH GDPT 2018)
-         * Mỗi bài học chứa đầy đủ: Định nghĩa/Định lý, Công thức, Cấu hình Canvas tương tác, Ví dụ từng bước.
-         */
         const curriculumData = [
             {
-                grade: "Lớp 6",
+                grade: "Lớp 6 – 7",
                 badgeColor: "bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300",
                 topics: [
                     {
-                        id: "g6-angles",
-                        title: "Góc & Các Loại Góc Đặc Biệt",
-                        category: "Hình học phẳng cơ bản",
-                        subtitle: "Nhận biết góc nhọn, góc vuông, góc tù, góc bẹt và cách đo góc bằng thước đo độ.",
-                        canvasMode: "angle",
-                        canvasHint: "Kéo điểm A để thay đổi số đo góc xOy",
+                        id: "g67-triangle-solver",
+                        title: "Tam Giác, Đường Cao, Phân Loại & Định Lý Py-ta-go",
+                        category: "Hình học phẳng trực quan & Tam giác",
+                        subtitle: "Tổng ba góc trong tam giác, bất đẳng thức tam giác, phân loại tam giác (vuông, cân, đều, nhọn, tù), tính chu vi, diện tích Hê-rông và đường cao.",
+                        canvasMode: "triangle-solver",
+                        canvasHint: "Nhập 3 cạnh a, b, c ở bảng trên để dựng tam giác chuẩn tỷ lệ",
                         definitions: [
-                            `<div class="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border-l-4 border-blue-500">
-                                <strong class="text-blue-700 dark:text-blue-300">Định nghĩa góc:</strong> Góc là hình gồm hai tia chung gốc. Gốc chung của hai tia gọi là <em>đỉnh của góc</em>, hai tia gọi là <em>hai cạnh của góc</em>. Ký hiệu: $\\widehat{xOy}$ hoặc $\\widehat{AOB}$.
+                            `<div class="p-3.5 rounded-xl bg-sky-50/70 dark:bg-sky-950/30 border-l-4 border-sky-500">
+                                <strong class="text-sky-700 dark:text-sky-300">Bất đẳng thức tam giác:</strong> Ba đoạn thẳng có độ dài $a, b, c$ lập thành một tam giác khi và chỉ khi tổng độ dài hai cạnh bất kỳ luôn lớn hơn độ dài cạnh còn lại: $|b - c| < a < b + c$.
                             </div>`,
                             `<ul class="list-disc pl-5 space-y-1.5">
-                                <li><strong>Góc nhọn:</strong> Là góc có số đo lớn hơn $0^\\circ$ và nhỏ hơn $90^\\circ$ ($0^\\circ < \\alpha < 90^\\circ$).</li>
-                                <li><strong>Góc vuông:</strong> Là góc có số đo bằng $90^\\circ$ (ký hiệu hai cạnh vuông góc $Ox \\perp Oy$).</li>
-                                <li><strong>Góc tù:</strong> Là góc có số đo lớn hơn $90^\\circ$ và nhỏ hơn $180^\\circ$ ($90^\\circ < \\alpha < 180^\\circ$).</li>
-                                <li><strong>Góc bẹt:</strong> Là góc có hai cạnh là hai tia đối nhau, số đo bằng $180^\\circ$.</li>
+                                <li><strong>Tổng ba góc:</strong> Trong $\\triangle ABC$, $\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ$.</li>
+                                <li><strong>Định lý Py-ta-go:</strong> $\\triangle ABC$ vuông tại $A \\iff a^2 = b^2 + c^2$.</li>
+                                <li><strong>Các đường đồng quy:</strong> Trọng tâm $G$ (3 trung tuyến), Trực tâm $H$ (3 đường cao), Tâm ngoại tiếp $O$ (3 trung trực), Tâm nội tiếp $I$ (3 phân giác trong).</li>
                             </ul>`
                         ],
                         formulas: [
-                            { name: "Góc vuông", tex: "\\widehat{xOy} = 90^\\circ \\iff Ox \\perp Oy" },
-                            { name: "Góc bẹt", tex: "\\widehat{xOy} = 180^\\circ" },
-                            { name: "Hai góc kề bù", tex: "\\widehat{xOy} + \\widehat{yOz} = 180^\\circ" },
-                            { name: "Tia phân giác Oz", tex: "\\widehat{xOz} = \\widehat{zOy} = \\frac{\\widehat{xOy}}{2}" }
+                            { name: "Chu vi & Nửa chu vi", tex: "P = a + b + c, \\quad p = \\frac{a + b + c}{2}" },
+                            { name: "Diện tích Hê-rông", tex: "S = \\sqrt{p(p - a)(p - b)(p - c)}" },
+                            { name: "Đường cao hạ từ đỉnh A", tex: "h_a = \\frac{2S}{a}" },
+                            { name: "Định lý Py-ta-go (vuông tại A)", tex: "a^2 = b^2 + c^2" }
                         ],
-                        latexRaw: "\\widehat{xOy} = 90^\\circ; \\quad \\widehat{xOy} + \\widehat{yOz} = 180^\\circ",
+                        latexRaw: "p = \\frac{a+b+c}{2}; \\quad S = \\sqrt{p(p-a)(p-b)(p-c)}; \\quad h_a = \\frac{2S}{a}",
                         example: {
-                            problem: "Cho hai góc kề bù $\\widehat{xOy}$ và $\\widehat{yOz}$. Biết $\\widehat{xOy} = 65^\\circ$. Tính số đo góc $\\widehat{yOz}$ và cho biết $\\widehat{yOz}$ là góc gì?",
+                            problem: "Cho $\\triangle ABC$ có độ dài ba cạnh $a = BC = 10\\text{ cm}$, $b = AC = 8\\text{ cm}$, $c = AB = 6\\text{ cm}$. Kiểm tra dạng tam giác, tính diện tích $S$ và đường cao $h_a$.",
                             steps: [
-                                "<strong>Bước 1 (Áp dụng tính chất hai góc kề bù):</strong> Vì $\\widehat{xOy}$ và $\\widehat{yOz}$ là hai góc kề bù nên tổng số đo của chúng bằng $180^\\circ$: $$\\widehat{xOy} + \\widehat{yOz} = 180^\\circ$$",
-                                "<strong>Bước 2 (Thay số tính toán):</strong> Thay $\\widehat{xOy} = 65^\\circ$, ta có: $$65^\\circ + \\widehat{yOz} = 180^\\circ \\Rightarrow \\widehat{yOz} = 180^\\circ - 65^\\circ = 115^\\circ$$",
-                                "<strong>Bước 3 (Kết luận loại góc):</strong> Vì $90^\\circ < 115^\\circ < 180^\\circ$ nên $\\widehat{yOz}$ là <strong>góc tù</strong>."
+                                "<strong>Bước 1 (Phân loại):</strong> Ta có $b^2 + c^2 = 8^2 + 6^2 = 100 = 10^2 = a^2$. Theo định lý Py-ta-go đảo, $\\triangle ABC$ vuông tại $A$.",
+                                "<strong>Bước 2 (Tính diện tích):</strong> $S = \\frac{1}{2}bc = \\frac{1}{2} \\cdot 8 \\cdot 6 = 24\\text{ (cm}^2\\text{)}$.",
+                                "<strong>Bước 3 (Tính đường cao $h_a$):</strong> $h_a = \\frac{2S}{a} = \\frac{2 \\cdot 24}{10} = 4,8\\text{ (cm)}$."
                             ]
+                        },
+                        quiz: {
+                            question: "Bộ ba độ dài nào sau đây KHÔNG THỂ là ba cạnh của một tam giác?",
+                            options: ["$6\\text{ cm}; 8\\text{ cm}; 10\\text{ cm}$", "$5\\text{ cm}; 5\\text{ cm}; 8\\text{ cm}$", "$3\\text{ cm}; 4\\text{ cm}; 7\\text{ cm}$", "$7\\text{ cm}; 9\\text{ cm}; 11\\text{ cm}$"],
+                            correctIndex: 2,
+                            explanation: "Vì $3 + 4 = 7$ (không lớn hơn cạnh thứ ba bằng $7$) nên vi phạm bất đẳng thức tam giác."
                         }
                     }
                 ]
             },
             {
-                grade: "Lớp 7",
-                badgeColor: "bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300",
-                topics: [
-                    {
-                        id: "g7-triangle-sum",
-                        title: "Tổng Ba Góc Trong Tam Giác & Đường Đồng Quy",
-                        category: "Tam giác phẳng",
-                        subtitle: "Định lý tổng ba góc của một tam giác, góc ngoài và trọng tâm tam giác.",
-                        canvasMode: "triangle",
-                        canvasHint: "Kéo 3 đỉnh A, B, C để thấy tổng 3 góc luôn bằng 180°",
-                        definitions: [
-                            `<div class="p-3.5 rounded-xl bg-teal-50/70 dark:bg-teal-950/30 border-l-4 border-teal-500">
-                                <strong class="text-teal-700 dark:text-teal-300">Định lý tổng ba góc:</strong> Tổng số đo ba góc trong một tam giác $\\triangle ABC$ bất kỳ luôn bằng $180^\\circ$: $\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ$.
-                            </div>`,
-                            `<p><strong>Tính chất góc ngoài:</strong> Mỗi góc ngoài của một tam giác bằng tổng hai góc trong không kề với nó ($\\widehat{ACx} = \\widehat{A} + \\widehat{B}$).</p>
-                             <p><strong>Trọng tâm $G$:</strong> Giao điểm của ba đường trung tuyến trong $\\triangle ABC$. Khoảng cách từ trọng tâm đến mỗi đỉnh bằng $\\frac{2}{3}$ độ dài đường trung tuyến đi qua đỉnh ấy.</p>`
-                        ],
-                        formulas: [
-                            { name: "Tổng 3 góc tam giác", tex: "\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ" },
-                            { name: "Bất đẳng thức tam giác", tex: "|b - c| < a < b + c" },
-                            { name: "Tính chất trọng tâm G", tex: "GA = \\frac{2}{3}m_a, \\quad GM = \\frac{1}{3}m_a" },
-                            { name: "Diện tích tam giác", tex: "S_{\\triangle ABC} = \\frac{1}{2} a \\cdot h_a" }
-                        ],
-                        latexRaw: "\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ; \\quad GA = \\frac{2}{3}m_a",
-                        example: {
-                            problem: "Cho $\\triangle ABC$ có $\\widehat{A} = 50^\\circ$ và $\\widehat{B} = 70^\\circ$. Tính số đo góc $\\widehat{C}$ và góc ngoài tại đỉnh $C$.",
-                            steps: [
-                                "<strong>Bước 1:</strong> Xét $\\triangle ABC$, áp dụng định lý tổng ba góc trong tam giác: $$\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ$$",
-                                "<strong>Bước 2:</strong> Suy ra số đo góc $C$: $$\\widehat{C} = 180^\\circ - (50^\\circ + 70^\\circ) = 60^\\circ$$",
-                                "<strong>Bước 3:</strong> Góc ngoài tại đỉnh $C$ kề bù với $\\widehat{C}$ nên bằng: $180^\\circ - 60^\\circ = 120^\\circ$ (hoặc bằng $\\widehat{A} + \\widehat{B} = 50^\\circ + 70^\\circ = 120^\\circ$)."
-                            ]
-                        }
-                    }
-                ]
-            },
-            {
-                grade: "Lớp 8",
-                badgeColor: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
-                topics: [
-                    {
-                        id: "g8-pythagoras",
-                        title: "Định Lý Py-ta-go & Tam Giác Vuông",
-                        category: "Tứ giác & Tam giác đồng dạng",
-                        subtitle: "Liên hệ giữa bình phương cạnh huyền và tổng bình phương hai cạnh góc vuông.",
-                        canvasMode: "right-triangle",
-                        canvasHint: "Kéo đỉnh A hoặc B để thay đổi cạnh góc vuông",
-                        definitions: [
-                            `<div class="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border-l-4 border-blue-500">
-                                <strong class="text-blue-700 dark:text-blue-300">Định lý Py-ta-go:</strong> Trong một tam giác vuông ($\	riangle ABC$ vuông tại $C$), bình phương độ dài cạnh huyền bằng tổng bình phương độ dài hai cạnh góc vuông: $c^2 = a^2 + b^2$.
-                            </div>`,
-                            `<p><strong>Định lý Py-ta-go đảo:</strong> Nếu một tam giác có bình phương của một cạnh bằng tổng các bình phương của hai cạnh kia thì tam giác đó là tam giác vuông.</p>
-                             <p><strong>Đường trung tuyến ứng với cạnh huyền:</strong> Trong tam giác vuông, đường trung tuyến ứng với cạnh huyền bằng nửa cạnh huyền ($CM = \\frac{1}{2}AB$).</p>`
-                        ],
-                        formulas: [
-                            { name: "Định lý Py-ta-go", tex: "AB^2 = AC^2 + BC^2 \\iff c^2 = b^2 + a^2" },
-                            { name: "Diện tích tam giác vuông", tex: "S = \\frac{1}{2} a \\cdot b = \\frac{1}{2} c \\cdot h" },
-                            { name: "Đường cao cạnh huyền", tex: "h = \\frac{a \\cdot b}{c}" },
-                            { name: "Bán kính ngoại tiếp", tex: "R = \\frac{c}{2}" }
-                        ],
-                        latexRaw: "c^2 = a^2 + b^2; \\quad S = \\frac{1}{2}ab; \\quad R = \\frac{c}{2}",
-                        example: {
-                            problem: "Cho $\\triangle ABC$ vuông tại $C$ có hai cạnh góc vuông $AC = 6\\text{ cm}$ và $BC = 8\\text{ cm}$. Tính độ dài cạnh huyền $AB$ và đường cao $CH$.",
-                            steps: [
-                                "<strong>Bước 1 (Tính cạnh huyền $AB$):</strong> Áp dụng định lý Py-ta-go cho $\\triangle ABC$ vuông tại $C$: $$AB^2 = AC^2 + BC^2 = 6^2 + 8^2 = 36 + 64 = 100$$",
-                                "<strong>Bước 2:</strong> Lấy căn bậc hai số học: $$AB = \\sqrt{100} = 10\\text{ (cm)}$$",
-                                "<strong>Bước 3 (Tính đường cao $CH$):</strong> Từ công thức diện tích $S = \\frac{1}{2}AC \\cdot BC = \\frac{1}{2}AB \\cdot CH$, ta có: $$CH = \\frac{AC \\cdot BC}{AB} = \\frac{6 \\cdot 8}{10} = 4,8\\text{ (cm)}$$"
-                            ]
-                        }
-                    }
-                ]
-            },
-            {
-                grade: "Lớp 9",
+                grade: "Lớp 8 – 9",
                 badgeColor: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300",
                 topics: [
                     {
-                        id: "g9-circle-inscribed",
-                        title: "Đường Tròn & Góc Nội Tiếp Chắn Nửa Đường Tròn",
-                        category: "Đường tròn & Đa giác nội tiếp",
-                        subtitle: "Tính chất đối xứng của đường tròn, góc nội tiếp và tiếp tuyến đường tròn.",
-                        canvasMode: "circle",
-                        canvasHint: "Kéo điểm C chạy trên đường tròn (O) để quan sát góc ACB",
+                        id: "g89-circle-arc",
+                        title: "Đường Tròn, Góc Nội Tiếp, Tiếp Tuyến & Độ Dài Cung",
+                        category: "Tứ giác, Hệ thức lượng & Đường tròn",
+                        subtitle: "Góc ở tâm, góc nội tiếp, tính chất hai tiếp tuyến cắt nhau, độ dài cung tròn và diện tích hình quạt tròn.",
+                        canvasMode: "circle-solver",
+                        canvasHint: "Nhập bán kính R, góc ở tâm α hoặc kéo điểm B trên đường tròn",
                         definitions: [
                             `<div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 border-l-4 border-indigo-500">
-                                <strong class="text-indigo-700 dark:text-indigo-300">Định lý góc nội tiếp:</strong> Trong một đường tròn tâm $O$, số đo của góc nội tiếp bằng nửa số đo của cung bị chắn: $\\widehat{ACB} = \\frac{1}{2}\\text{sđ}\\overset{\\frown}{AB}$.
+                                <strong class="text-indigo-700 dark:text-indigo-300">Góc nội tiếp & Góc ở tâm:</strong> Trong đường tròn $(O; R)$, số đo góc nội tiếp $\\widehat{ACB}$ bằng nửa số đo góc ở tâm $\\widehat{AOB}$ cùng chắn cung $AB$: $\\widehat{ACB} = \\frac{1}{2}\\widehat{AOB} = \\frac{\\alpha}{2}$.
                             </div>`,
-                            `<p><strong>Hệ quả quan trọng:</strong> Góc nội tiếp chắn nửa đường tròn là góc vuông ($\\widehat{ACB} = 90^\\circ$ khi $AB$ là đường kính của $(O; R)$).</p>
-                             <p><strong>Tứ giác nội tiếp:</strong> Tổng số đo hai góc đối diện của một tứ giác nội tiếp luôn bằng $180^\\circ$.</p>`
+                            `<ul class="list-disc pl-5 space-y-1.5">
+                                <li><strong>Tiếp tuyến đường tròn:</strong> Tiếp tuyến $Ax$ tại tiếp điểm $A$ luôn vuông góc với bán kính đi qua tiếp điểm ($Ax \\perp OA$).</li>
+                                <li><strong>Góc nội tiếp chắn nửa đường tròn:</strong> Khi $\\alpha = 180^\\circ$ ($AB$ là đường kính) thì $\\widehat{ACB} = 90^\\circ$.</li>
+                            </ul>`
                         ],
                         formulas: [
-                            { name: "Chu vi đường tròn", tex: "C = 2\\pi R = \\pi d" },
-                            { name: "Diện tích hình tròn", tex: "S = \\pi R^2" },
-                            { name: "Độ dài cung tròn n°", tex: "l = \\frac{\\pi R n}{180}" },
-                            { name: "Diện tích hình quạt n°", tex: "S_q = \\frac{\\pi R^2 n}{360} = \\frac{l \\cdot R}{2}" }
+                            { name: "Độ dài cung tròn n°", tex: "l = \\frac{\\pi R \\alpha}{180}" },
+                            { name: "Diện tích hình quạt tròn", tex: "S_q = \\frac{\\pi R^2 \\alpha}{360} = \\frac{l \\cdot R}{2}" },
+                            { name: "Độ dài dây cung AB", tex: "AB = 2R \\sin\\frac{\\alpha}{2}" },
+                            { name: "Góc nội tiếp chắn cung AB", tex: "\\widehat{ACB} = \\frac{1}{2}\\widehat{AOB} = \\frac{\\alpha}{2}" }
                         ],
-                        latexRaw: "C = 2\\pi R; \\quad S = \\pi R^2; \\quad S_q = \\frac{\\pi R^2 n}{360}",
+                        latexRaw: "l = \\frac{\\pi R \\alpha}{180}; \\quad S_q = \\frac{\\pi R^2 \\alpha}{360}; \\quad AB = 2R\\sin\\frac{\\alpha}{2}",
                         example: {
-                            problem: "Cho đường tròn $(O; R = 5\\text{ cm})$ có đường kính $AB$. Lấy điểm $C$ thuộc $(O)$ sao cho $AC = 6\\text{ cm}$. Tính độ dài dây $BC$ và diện tích $\\triangle ABC$.",
+                            problem: "Cho đường tròn $(O; R = 6\\text{ cm})$ và cung nhỏ $AB$ có số đo góc ở tâm $\\widehat{AOB} = 60^\\circ$. Tính độ dài cung $l$, diện tích hình quạt $OAB$ và độ dài dây $AB$.",
                             steps: [
-                                "<strong>Bước 1 (Chứng minh tam giác vuông):</strong> Vì $C \\in (O)$ và $AB$ là đường kính nên $\\widehat{ACB} = 90^\\circ$ (góc nội tiếp chắn nửa đường tròn). Do đó $\\triangle ABC$ vuông tại $C$.",
-                                "<strong>Bước 2 (Tính dây $BC$):</strong> Ta có đường kính $AB = 2R = 10\\text{ cm}$. Áp dụng định lý Py-ta-go: $$BC = \\sqrt{AB^2 - AC^2} = \\sqrt{10^2 - 6^2} = 8\\text{ (cm)}$$",
-                                "<strong>Bước 3 (Tính diện tích):</strong> $$S_{\\triangle ABC} = \\frac{1}{2} AC \\cdot BC = \\frac{1}{2} \\cdot 6 \\cdot 8 = 24\\text{ (cm}^2\\text{)}$$"
+                                "<strong>Bước 1 (Độ dài cung):</strong> $l = \\frac{\\pi \\cdot 6 \\cdot 60}{180} = 2\\pi \\approx 6,28\\text{ (cm)}$.",
+                                "<strong>Bước 2 (Diện tích hình quạt):</strong> $S_q = \\frac{\\pi \\cdot 6^2 \\cdot 60}{360} = 6\\pi \\approx 18,85\\text{ (cm}^2\\text{)}$.",
+                                "<strong>Bước 3 (Dây cung AB):</strong> $\\triangle OAB$ cân tại $O$ có $\\widehat{O} = 60^\\circ$ nên là tam giác đều $\\Rightarrow AB = R = 6\\text{ cm}$."
                             ]
+                        },
+                        quiz: {
+                            question: "Một hình quạt tròn có bán kính $R = 4\\text{ cm}$ và độ dài cung tương ứng là $l = 6\\text{ cm}$. Diện tích hình quạt tròn đó bằng:",
+                            options: ["$24\\text{ cm}^2$", "$12\\text{ cm}^2$", "$12\\pi\\text{ cm}^2$", "$6\\text{ cm}^2$"],
+                            correctIndex: 1,
+                            explanation: "Áp dụng công thức $S_q = \\frac{l \\cdot R}{2} = \\frac{6 \\cdot 4}{2} = 12\\text{ (cm}^2\\text{)}$."
                         }
                     }
                 ]
@@ -449,33 +350,42 @@
                 badgeColor: "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
                 topics: [
                     {
-                        id: "g10-vectors-oxy",
-                        title: "Hệ Thức Lượng Tam Giác & Tọa Độ Vectơ Oxy",
-                        category: "Vectơ & Hình học tọa độ phẳng",
-                        subtitle: "Định lý Côsin, Định lý Sin và biểu diễn tọa độ vectơ trên mặt phẳng Oxy.",
-                        canvasMode: "oxy",
-                        canvasHint: "Kéo đầu mút vectơ u và v trên hệ trục Oxy",
+                        id: "g10-oxy-coords",
+                        title: "Hệ Thức Lượng Tam Giác & Tọa Độ Oxy",
+                        category: "Vectơ & Phương pháp tọa độ phẳng",
+                        subtitle: "Tọa độ điểm, tọa độ vectơ, tích vô hướng, trọng tâm tam giác và phương trình đường thẳng, đường tròn, elip trên mặt phẳng Oxy.",
+                        canvasMode: "oxy-solver",
+                        canvasHint: "Nhập tọa độ 3 điểm A, B, C hoặc kéo các đỉnh trên lưới Oxy",
                         definitions: [
                             `<div class="p-3.5 rounded-xl bg-violet-50/70 dark:bg-violet-950/30 border-l-4 border-violet-500">
-                                <strong class="text-violet-700 dark:text-violet-300">Tích vô hướng hai vectơ:</strong> Cho $\\vec{u} = (x_1; y_1)$ và $\\vec{v} = (x_2; y_2)$ trên hệ trục $Oxy$. Tích vô hướng là $\\vec{u} \\cdot \\vec{v} = x_1x_2 + y_1y_2 = |\\vec{u}|\\cdot|\\vec{v}|\\cos(\\vec{u}, \\vec{v})$.
+                                <strong class="text-violet-700 dark:text-violet-300">Tọa độ vectơ & Độ dài đoạn thẳng:</strong> Cho $A(x_A; y_A)$ và $B(x_B; y_B)$. Khi đó $\\overrightarrow{AB} = (x_B - x_A; y_B - y_A)$ và $AB = \\sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}$.
                             </div>`,
-                            `<p><strong>Điều kiện vuông góc:</strong> Hai vectơ khác $\\vec{0}$ vuông góc với nhau khi và chỉ khi tích vô hướng của chúng bằng $0$: $\\vec{u} \\perp \\vec{v} \\iff x_1x_2 + y_1y_2 = 0$.</p>
-                             <p><strong>Định lý Côsin trong $\\triangle ABC$:</strong> $a^2 = b^2 + c^2 - 2bc\\cos A$.</p>`
+                            `<ul class="list-disc pl-5 space-y-1.5">
+                                <li><strong>Tọa độ trọng tâm $G$:</strong> $x_G = \\frac{x_A + x_B + x_C}{3}, \\; y_G = \\frac{y_A + y_B + y_C}{3}$.</li>
+                                <li><strong>Tích vô hướng:</strong> $\\overrightarrow{AB} \\cdot \\overrightarrow{AC} = x_{\\overrightarrow{AB}}x_{\\overrightarrow{AC}} + y_{\\overrightarrow{AB}}y_{\\overrightarrow{AC}}$.</li>
+                                <li><strong>Phương trình chính tắc Elip $(E)$:</strong> $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ ($a > b > 0$).</li>
+                            </ul>`
                         ],
                         formulas: [
-                            { name: "Định lý Côsin", tex: "a^2 = b^2 + c^2 - 2bc\\cos A" },
-                            { name: "Định lý Sin", tex: "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R" },
-                            { name: "Độ dài vectơ Oxy", tex: "|\\vec{u}| = \\sqrt{x_1^2 + y_1^2}" },
-                            { name: "Góc giữa hai vectơ", tex: "\\cos(\\vec{u}, \\vec{v}) = \\frac{x_1x_2 + y_1y_2}{\\sqrt{x_1^2+y_1^2}\\sqrt{x_2^2+y_2^2}}" }
+                            { name: "Định lý Côsin & Định lý Sin", tex: "a^2 = b^2 + c^2 - 2bc\\cos A, \\quad \\frac{a}{\\sin A} = 2R" },
+                            { name: "Diện tích tam giác tọa độ", tex: "S_{\\triangle ABC} = \\frac{1}{2}|(x_B - x_A)(y_C - y_A) - (x_C - x_A)(y_B - y_A)|" },
+                            { name: "Phương trình đường tròn", tex: "(x - a)^2 + (y - b)^2 = R^2" },
+                            { name: "Khoảng cách từ M₀ đến Δ", tex: "d(M_0, \\Delta) = \\frac{|Ax_0 + By_0 + C|}{\\sqrt{A^2 + B^2}}" }
                         ],
-                        latexRaw: "a^2 = b^2 + c^2 - 2bc\\cos A; \\quad \\vec{u}\\cdot\\vec{v} = x_1x_2 + y_1y_2",
+                        latexRaw: "\\overrightarrow{AB} = (x_B - x_A; y_B - y_A); \\quad S_{\\triangle ABC} = \\frac{1}{2}|(x_B - x_A)(y_C - y_A) - (x_C - x_A)(y_B - y_A)|",
                         example: {
-                            problem: "Trong mặt phẳng tọa độ $Oxy$, cho hai vectơ $\\vec{u} = (3; 4)$ và $\\vec{v} = (-4; 3)$. Tính độ dài $|\\vec{u}|$, tích vô hướng $\\vec{u} \\cdot \\vec{v}$ và nhận xét góc giữa hai vectơ.",
+                            problem: "Trong mặt phẳng $Oxy$, cho $A(1; 1)$, $B(4; 1)$, $C(1; 5)$. Tính độ dài các cạnh, tọa độ trọng tâm $G$ và diện tích $\\triangle ABC$.",
                             steps: [
-                                "<strong>Bước 1 (Tính độ dài vectơ):</strong> $$|\\vec{u}| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = 5$$",
-                                "<strong>Bước 2 (Tính tích vô hướng):</strong> $$\\vec{u} \\cdot \\vec{v} = 3 \\cdot (-4) + 4 \\cdot 3 = -12 + 12 = 0$$",
-                                "<strong>Bước 3 (Kết luận):</strong> Vì $\\vec{u} \\cdot \\vec{v} = 0$ nên $\\vec{u} \\perp \\vec{v}$, tức là góc giữa hai vectơ bằng $90^\\circ$."
+                                "<strong>Bước 1:</strong> $\\overrightarrow{AB} = (3; 0) \\Rightarrow AB = 3$; $\\overrightarrow{AC} = (0; 4) \\Rightarrow AC = 4$; $\\overrightarrow{BC} = (-3; 4) \\Rightarrow BC = 5$.",
+                                "<strong>Bước 2:</strong> Tọa độ trọng tâm $G\\left(\\frac{1+4+1}{3}; \\frac{1+1+5}{3}\\right) = \\left(2; \\frac{7}{3}\\right)$.",
+                                "<strong>Bước 3:</strong> Vì $\\overrightarrow{AB} \\cdot \\overrightarrow{AC} = 3\\cdot 0 + 0\\cdot 4 = 0$ nên $\\triangle ABC$ vuông tại $A$, $S = \\frac{1}{2}AB \\cdot AC = 6$."
                             ]
+                        },
+                        quiz: {
+                            question: "Trong mặt phẳng $Oxy$, cho $A(-2; 3)$ và $B(4; -1)$. Tọa độ trung điểm $I$ của đoạn thẳng $AB$ là:",
+                            options: ["$I(1; 1)$", "$I(3; -2)$", "$I(2; 2)$", "$I(6; -4)$"],
+                            correctIndex: 0,
+                            explanation: "$x_I = \\frac{-2 + 4}{2} = 1$, $y_I = \\frac{3 + (-1)}{2} = 1 \\Rightarrow I(1; 1)$."
                         }
                     }
                 ]
@@ -485,33 +395,212 @@
                 badgeColor: "bg-fuchsia-100 text-fuchsia-700 dark:bg-fuchsia-900/40 dark:text-fuchsia-300",
                 topics: [
                     {
-                        id: "g11-solid-geometry",
-                        title: "Quan Hệ Vuông Góc & Thể Tích Khối Chóp, Lăng Trụ",
-                        category: "Hình học không gian tổng hợp",
-                        subtitle: "Đường thẳng vuông góc mặt phẳng, góc nhị diện và thể tích khối đa diện.",
-                        canvasMode: "pyramid3d",
-                        canvasHint: "Kéo chuột trái/phải để xoay mô hình khối chóp S.ABCD trong không gian 3D",
+                        id: "g11-b10-planes",
+                        title: "Bài 10: Đường Thẳng & Mặt Phẳng Trong Không Gian",
+                        category: "Chương IV. Quan hệ song song trong không gian (KNTT)",
+                        subtitle: "Các tính chất thừa nhận, 3 cách xác định mặt phẳng, giao tuyến của hai mặt phẳng, hình chóp và hình tứ diện.",
+                        canvasMode: "space3d",
+                        defaultShape: "pyramid",
+                        defaultSection: false,
+                        canvasHint: "Chọn hình khối, nhập tỉ số k hoặc kéo chuột xoay 360°",
                         definitions: [
                             `<div class="p-3.5 rounded-xl bg-fuchsia-50/70 dark:bg-fuchsia-950/30 border-l-4 border-fuchsia-500">
-                                <strong class="text-fuchsia-700 dark:text-fuchsia-300">Đường thẳng vuông góc mặt phẳng:</strong> Nếu đường thẳng $d$ vuông góc với hai đường thẳng cắt nhau $a$ và $b$ cùng nằm trong mặt phẳng $(P)$ thì $d \\perp (P)$.
+                                <strong class="text-fuchsia-700 dark:text-fuchsia-300">Ba cách xác định một mặt phẳng:</strong>
+                                <ol class="list-decimal pl-5 mt-1 space-y-1">
+                                    <li>Đi qua <strong>ba điểm không thẳng hàng</strong> $A, B, C$ — ký hiệu $(ABC)$.</li>
+                                    <li>Đi qua một điểm $A$ và chứa một đường thẳng $d$ không đi qua $A$ — ký hiệu $mp(A, d)$.</li>
+                                    <li>Chứa <strong>hai đường thẳng cắt nhau</strong> $a$ và $b$ — ký hiệu $mp(a, b)$.</li>
+                                </ol>
                             </div>`,
-                            `<p><strong>Định lý ba đường vuông góc:</strong> Cho đường thẳng $a$ nằm trong $(P)$ và $b$ không thuộc $(P)$ ($b$ không vuông góc $(P)$). Gọi $b'$ là hình chiếu vuông góc của $b$ trên $(P)$. Khi đó: $a \\perp b \\iff a \\perp b'$.</p>
-                             <p><strong>Thể tích khối chóp:</strong> Bằng một phần ba tích của diện tích mặt đáy và chiều cao khối chóp.</p>`
+                            `<p><strong>Các tính chất thừa nhận cơ bản:</strong></p>
+                             <ul class="list-disc pl-5 space-y-1">
+                                <li>Nếu một đường thẳng có hai điểm phân biệt thuộc một mặt phẳng thì mọi điểm của đường thẳng đều thuộc mặt phẳng đó ($d \\subset (P)$).</li>
+                                <li>Nếu hai mặt phẳng phân biệt có điểm chung thì các điểm chung của chúng tạo thành một đường thẳng duy nhất gọi là <strong>giao tuyến</strong>: $d = (P) \\cap (Q)$.</li>
+                                <li><strong>Quy tắc vẽ hình biểu diễn:</strong> Đường nhìn thấy vẽ <em>nét liền</em>, đường bị che khuất vẽ <em>nét đứt đoạn</em>.</li>
+                             </ul>`,
+                            `<p><strong>Hình chóp & Hình tứ diện:</strong> Hình chóp $S.A_1A_2...A_n$ có đỉnh $S$ nằm ngoài mặt phẳng đáy. Hình tứ diện $ABCD$ (4 đỉnh không đồng phẳng) là hình chóp tam giác có 4 mặt đều là tam giác; nếu 4 mặt là tam giác đều thì gọi là <em>hình tứ diện đều</em>.</p>`
                         ],
                         formulas: [
-                            { name: "Thể tích khối chóp", tex: "V_{\\text{chóp}} = \\frac{1}{3} S_{\\text{đáy}} \\cdot h" },
-                            { name: "Thể tích khối lăng trụ", tex: "V_{\\text{lăng trụ}} = S_{\\text{đáy}} \\cdot h" },
-                            { name: "Thể tích khối chóp cụt đều", tex: "V = \\frac{1}{3}h\\left(S_1 + \\sqrt{S_1 S_2} + S_2\\right)" },
-                            { name: "Đường chéo hình lập phương", tex: "d = a\\sqrt{3}, \\quad V = a^3" }
+                            { name: "Quan hệ liên thuộc", tex: "A \\in (P), \\quad B \\notin (P), \\quad d \\subset (P)" },
+                            { name: "Giao tuyến hai mặt phẳng", tex: "\\begin{cases} M \\in (P) \\cap (Q) \\\\ N \\in (P) \\cap (Q) \\end{cases} \\Rightarrow MN = (P) \\cap (Q)" },
+                            { name: "Hình chóp đáy n-giác", tex: "\\text{Số đỉnh} = n + 1, \\quad \\text{Số cạnh} = 2n" },
+                            { name: "Hình tứ diện ABCD", tex: "4\\text{ đỉnh}, \\quad 6\\text{ cạnh}, \\quad 4\\text{ mặt}" }
                         ],
-                        latexRaw: "V_{\\text{chóp}} = \\frac{1}{3} S_{\\text{đáy}} \\cdot h; \\quad V_{\\text{lăng trụ}} = S_{\\text{đáy}} \\cdot h",
+                        latexRaw: "d = (P) \\cap (Q); \\quad A \\in (P); \\quad d \\subset (P)",
                         example: {
-                            problem: "Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình vuông cạnh $a$. Cạnh bên $SA \\perp (ABCD)$ và $SA = a\\sqrt{3}$. Tính thể tích khối chóp $S.ABCD$ và góc giữa đường thẳng $SC$ với mặt phẳng $(ABCD)$.",
+                            problem: "(Ví dụ 3 - SGK Toán 11 KNTT) Cho $\\triangle ABC$ và điểm $S \\notin (ABC)$. Gọi $M, N$ lần lượt là trung điểm của $AB, AC$. Tìm giao tuyến của hai mặt phẳng $(SBN)$ và $(SCM)$.",
                             steps: [
-                                "<strong>Bước 1 (Tính diện tích đáy & Thể tích):</strong> Đáy $ABCD$ là hình vuông cạnh $a \\Rightarrow S_{ABCD} = a^2$. Chiều cao $h = SA = a\\sqrt{3}$.<br>Thể tích: $$V = \\frac{1}{3} S_{ABCD} \\cdot SA = \\frac{1}{3} a^2 \\cdot a\\sqrt{3} = \\frac{a^3\\sqrt{3}}{3}$$",
-                                "<strong>Bước 2 (Xác định góc giữa $SC$ và $(ABCD)$):</strong> Vì $SA \\perp (ABCD)$ nên $AC$ là hình chiếu vuông góc của $SC$ lên $(ABCD)$. Vậy $\\widehat{(SC, (ABCD))} = \\widehat{SCA}$.",
-                                "<strong>Bước 3 (Tính số đo góc):</strong> Đường chéo hình vuông $AC = a\\sqrt{2}$. Xét $\\triangle SAC$ vuông tại $A$: $$\\tan\\widehat{SCA} = \\frac{SA}{AC} = \\frac{a\\sqrt{3}}{a\\sqrt{2}} = \\frac{\\sqrt{6}}{2} \\Rightarrow \\widehat{SCA} \\approx 50^\\circ 46'$$"
+                                "<strong>Bước 1 (Tìm điểm chung thứ nhất):</strong> Dễ thấy $S$ là điểm chung thứ nhất của $(SBN)$ và $(SCM)$.",
+                                "<strong>Bước 2 (Tìm điểm chung thứ hai):</strong> Trong mặt phẳng $(ABC)$, hai đường trung tuyến $BN$ và $CM$ cắt nhau tại trọng tâm $G$ của $\\triangle ABC$.",
+                                "<strong>Bước 3 (Kết luận giao tuyến):</strong> Vì $G \\in BN \\subset (SBN)$ và $G \\in CM \\subset (SCM)$ nên $G$ là điểm chung thứ hai. Vậy $(SBN) \\cap (SCM) = SG$."
                             ]
+                        },
+                        quiz: {
+                            question: "Trong các yếu tố sau, yếu tố nào KHÔNG xác định duy nhất một mặt phẳng?",
+                            options: ["Ba điểm phân biệt không thẳng hàng", "Hai đường thẳng cắt nhau", "Bốn điểm phân biệt bất kỳ trong không gian", "Một điểm và một đường thẳng không đi qua điểm đó"],
+                            correctIndex: 2,
+                            explanation: "Bốn điểm bất kỳ có thể không đồng phẳng (ví dụ 4 đỉnh của một hình tứ diện), khi đó không có mặt phẳng nào đi qua cả 4 điểm."
+                        }
+                    },
+                    {
+                        id: "g11-b11-parallel-lines",
+                        title: "Bài 11: Hai Đường Thẳng Song Song Trong Không Gian",
+                        category: "Chương IV. Quan hệ song song trong không gian (KNTT)",
+                        subtitle: "Vị trí tương đối của hai đường thẳng (đồng phẳng, chéo nhau), tính chất bắc cầu và Định lý ba đường giao tuyến.",
+                        canvasMode: "space3d",
+                        defaultShape: "tetrahedron",
+                        defaultSection: false,
+                        canvasHint: "Xoay tứ diện S.ABC để quan sát các cặp cạnh đối diện chéo nhau",
+                        definitions: [
+                            `<div class="p-3.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border-l-4 border-purple-500">
+                                <strong class="text-purple-700 dark:text-purple-300">Bốn vị trí tương đối của hai đường thẳng $a$ và $b$:</strong>
+                                <ul class="list-disc pl-5 mt-1 space-y-1">
+                                    <li><strong>Đồng phẳng:</strong> $a$ và $b$ cắt nhau ($a \\cap b = \\{M\\}$), song song ($a \\parallel b$), hoặc trùng nhau ($a \\equiv b$).</li>
+                                    <li><strong>Chéo nhau:</strong> $a$ và $b$ không cùng nằm trong bất kỳ mặt phẳng nào (không có điểm chung và không song song).</li>
+                                </ul>
+                            </div>`,
+                            `<p><strong>Tính chất cơ bản:</strong> Trong không gian, hai đường thẳng phân biệt cùng song song với đường thẳng thứ ba thì song song với nhau ($a \\parallel c, b \\parallel c \\Rightarrow a \\parallel b$).</p>
+                             <p><strong>Định lý về ba đường giao tuyến:</strong> Nếu ba mặt phẳng đôi một cắt nhau theo ba giao tuyến phân biệt thì ba giao tuyến đó hoặc <strong>đồng quy</strong> hoặc <strong>đôi một song song</strong> với nhau.</p>`
+                        ],
+                        formulas: [
+                            { name: "Tính chất bắc cầu", tex: "\\begin{cases} a \\parallel c \\\\ b \\parallel c \\end{cases} \\Rightarrow a \\parallel b \\quad (a \\neq b)" },
+                            { name: "Hệ quả giao tuyến song song", tex: "\\begin{cases} a \\subset (P), \\; b \\subset (Q) \\\\ a \\parallel b, \\; d = (P) \\cap (Q) \\end{cases} \\Rightarrow d \\parallel a \\parallel b" },
+                            { name: "Định lý 3 đường giao tuyến", tex: "a, b, c \\text{ đồng quy hoặc } a \\parallel b \\parallel c" },
+                            { name: "Tiên đề Ơ-clit không gian", tex: "\\forall M \\notin d, \\; \\exists! \\, d' \\ni M : d' \\parallel d" }
+                        ],
+                        latexRaw: "\\begin{cases} a \\subset (P), b \\subset (Q) \\\\ a \\parallel b, d = (P) \\cap (Q) \\end{cases} \\Rightarrow d \\parallel a \\parallel b",
+                        example: {
+                            problem: "(Ví dụ 4 - SGK Toán 11 KNTT) Cho hình chóp $S.ABCD$ có đáy $ABCD$ là hình bình hành. Xác định giao tuyến của hai mặt phẳng $(SAB)$ và $(SCD)$.",
+                            steps: [
+                                "<strong>Bước 1:</strong> Hai mặt phẳng $(SAB)$ và $(SCD)$ có điểm chung thứ nhất là đỉnh $S$.",
+                                "<strong>Bước 2:</strong> Ta có $AB \\subset (SAB)$, $CD \\subset (SCD)$ và $AB \\parallel CD$ (do $ABCD$ là hình bình hành).",
+                                "<strong>Bước 3:</strong> Theo hệ quả định lý ba đường giao tuyến, giao tuyến của $(SAB)$ và $(SCD)$ là đường thẳng $m$ đi qua $S$ và song song với $AB, CD$."
+                            ]
+                        },
+                        quiz: {
+                            question: "Cho hình tứ diện $ABCD$. Cặp đường thẳng nào sau đây là hai đường thẳng chéo nhau?",
+                            options: ["$AB$ và $BC$", "$AC$ và $CD$", "$AB$ và $CD$", "$AD$ và $BD$"],
+                            correctIndex: 2,
+                            explanation: "Vì $A, B, C, D$ không đồng phẳng nên hai cạnh đối diện của tứ diện là $AB$ và $CD$ không cùng nằm trong mặt phẳng nào, tức là chúng chéo nhau."
+                        }
+                    },
+                    {
+                        id: "g11-b12-line-plane",
+                        title: "Bài 12: Đường Thẳng Và Mặt Phẳng Song Song",
+                        category: "Chương IV. Quan hệ song song trong không gian (KNTT)",
+                        subtitle: "Vị trí tương đối, dấu hiệu nhận biết đường thẳng song song với mặt phẳng và định lý giao tuyến.",
+                        canvasMode: "space3d",
+                        defaultShape: "pyramid",
+                        defaultSection: true,
+                        canvasHint: "Thay đổi tỉ số k = SM/SA để thấy giao tuyến MN luôn song song AB",
+                        definitions: [
+                            `<div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 border-l-4 border-indigo-500">
+                                <strong class="text-indigo-700 dark:text-indigo-300">Điều kiện để đường thẳng song song với mặt phẳng:</strong> Nếu đường thẳng $a$ không nằm trong mặt phẳng $(P)$ và $a$ song song với một đường thẳng $b$ nằm trong $(P)$ thì $a$ song song với $(P)$.
+                            </div>`,
+                            `<p><strong>Tính chất giao tuyến quan trọng:</strong> Cho đường thẳng $a$ song song với mặt phẳng $(P)$. Nếu mặt phẳng $(Q)$ chứa $a$ và cắt $(P)$ theo giao tuyến $b$ thì $b$ song song với $a$.</p>
+                             <p><strong>Hệ quả duy nhất:</strong> Cho hai đường thẳng chéo nhau $a$ và $b$, có duy nhất một mặt phẳng chứa $a$ và song song với $b$.</p>`
+                        ],
+                        formulas: [
+                            { name: "Dấu hiệu nhận biết d // (P)", tex: "\\begin{cases} a \\not\\subset (P) \\\\ a \\parallel b, \\; b \\subset (P) \\end{cases} \\Rightarrow a \\parallel (P)" },
+                            { name: "Định lý giao tuyến", tex: "\\begin{cases} a \\parallel (P) \\\\ a \\subset (Q), \\; (P) \\cap (Q) = b \\end{cases} \\Rightarrow b \\parallel a" },
+                            { name: "Giao tuyến 2 mp cùng // a", tex: "\\begin{cases} a \\parallel (P), \\; a \\parallel (Q) \\\\ (P) \\cap (Q) = d \\end{cases} \\Rightarrow d \\parallel a" },
+                            { name: "3 vị trí tương đối", tex: "d \\parallel (P), \\; d \\cap (P) = \\{M\\}, \\; d \\subset (P)" }
+                        ],
+                        latexRaw: "\\begin{cases} a \\not\\subset (P) \\\\ a \\parallel b \\subset (P) \\end{cases} \\Rightarrow a \\parallel (P)",
+                        example: {
+                            problem: "(Ví dụ 4 - SGK Toán 11 KNTT) Cho tứ diện $ABCD$, điểm $E$ nằm giữa $A$ và $C$. Mặt phẳng $(P)$ qua $E$ song song với $AB$ và $CD$. Thiết diện của $(P)$ và tứ diện là hình gì?",
+                            steps: [
+                                "<strong>Bước 1:</strong> Vì $AB \\parallel (P)$ nên $(P)$ cắt $(ABC)$ theo giao tuyến $EF \\parallel AB$ ($F \\in BC$) và cắt $(ABD)$ theo giao tuyến $GH \\parallel AB$ ($G \\in BD, H \\in AD$).",
+                                "<strong>Bước 2:</strong> Tương tự, vì $CD \\parallel (P)$ nên $(P)$ cắt $(ACD)$ theo $EH \\parallel CD$ và cắt $(BCD)$ theo $FG \\parallel CD$.",
+                                "<strong>Bước 3:</strong> Tứ giác $EFGH$ có $EF \\parallel GH$ và $EH \\parallel FG$ nên thiết diện là một <strong>hình bình hành</strong>."
+                            ]
+                        },
+                        quiz: {
+                            question: "Cho đường thẳng $a \\parallel (P)$ và mặt phẳng $(Q)$ chứa $a$. Nếu $(Q)$ cắt $(P)$ theo giao tuyến $b$ thì vị trí tương đối của $a$ và $b$ là:",
+                            options: ["Cắt nhau", "Chéo nhau", "Song song với nhau", "Vuông góc với nhau"],
+                            correctIndex: 2,
+                            explanation: "Theo tính chất đường thẳng song song với mặt phẳng: Nếu $a \\parallel (P)$, $a \\subset (Q)$ và $(P) \\cap (Q) = b$ thì $b \\parallel a$."
+                        }
+                    },
+                    {
+                        id: "g11-b13-parallel-planes",
+                        title: "Bài 13: Hai Mặt Phẳng Song Song & Định Lý Thalès",
+                        category: "Chương IV. Quan hệ song song trong không gian (KNTT)",
+                        subtitle: "Điều kiện hai mặt phẳng song song, Định lý Thalès trong không gian, Hình lăng trụ và Hình hộp.",
+                        canvasMode: "space3d",
+                        defaultShape: "pyramid",
+                        defaultSection: true,
+                        canvasHint: "Nhập tỉ số k = SM/SA để tính ngay tỉ số diện tích thiết diện S(MNPQ)/S(ABCD) = k²",
+                        definitions: [
+                            `<div class="p-3.5 rounded-xl bg-fuchsia-50/70 dark:bg-fuchsia-950/30 border-l-4 border-fuchsia-500">
+                                <strong class="text-fuchsia-700 dark:text-fuchsia-300">Điều kiện hai mặt phẳng song song:</strong> Nếu mặt phẳng $(\\alpha)$ chứa hai đường thẳng <strong>cắt nhau</strong> $a, b$ và $a, b$ cùng song song với mặt phẳng $(\\beta)$ thì $(\\alpha) \\parallel (\\beta)$.
+                            </div>`,
+                            `<p><strong>Định lý Thalès trong không gian:</strong> Ba mặt phẳng đôi một song song chắn trên hai cát tuyến phân biệt bất kỳ những đoạn thẳng tương ứng tỉ lệ.</p>
+                             <p><strong>Hình lăng trụ & Hình hộp:</strong> Hình lăng trụ có hai mặt đáy là hai đa giác bằng nhau nằm trên hai mặt phẳng song song, các mặt bên là hình bình hành. <strong>Hình hộp</strong> là hình lăng trụ có đáy là hình bình hành (có 6 mặt là hình bình hành, 4 đường chéo đồng quy tại trung điểm mỗi đường).</p>`
+                        ],
+                        formulas: [
+                            { name: "Dấu hiệu (α) // (β)", tex: "\\begin{cases} a, b \\subset (\\alpha), \\; a \\cap b = \\{I\\} \\\\ a \\parallel (\\beta), \\; b \\parallel (\\beta) \\end{cases} \\Rightarrow (\\alpha) \\parallel (\\beta)" },
+                            { name: "Cắt bởi mp thứ ba (R)", tex: "\\begin{cases} (P) \\parallel (Q) \\\\ (R) \\cap (P) = a, \\; (R) \\cap (Q) = b \\end{cases} \\Rightarrow a \\parallel b" },
+                            { name: "Định lý Thalès không gian", tex: "\\frac{AB}{A'B'} = \\frac{BC}{B'C'} = \\frac{AC}{A'C'}" },
+                            { name: "Tỉ số diện tích thiết diện // đáy", tex: "\\frac{S_{MNPQ}}{S_{ABCD}} = \\left(\\frac{SM}{SA}\\right)^2 = k^2" }
+                        ],
+                        latexRaw: "\\frac{AB}{A'B'} = \\frac{BC}{B'C'} = \\frac{AC}{A'C'}; \\quad \\frac{S_{MNPQ}}{S_{ABCD}} = k^2",
+                        example: {
+                            problem: "(Ví dụ 2 - SGK Toán 11 KNTT) Cho hình chóp $S.ABCD$. Gọi $M, N, P, Q$ lần lượt là trung điểm các cạnh bên $SA, SB, SC, SD$. Chứng minh $(MNPQ) \\parallel (ABCD)$.",
+                            steps: [
+                                "<strong>Bước 1:</strong> Trong $\\triangle SAB$, $MN$ là đường trung bình $\\Rightarrow MN \\parallel AB \\Rightarrow MN \\parallel (ABCD)$.",
+                                "<strong>Bước 2:</strong> Tương tự trong $\\triangle SBC$, $NP$ là đường trung bình $\\Rightarrow NP \\parallel BC \\Rightarrow NP \\parallel (ABCD)$.",
+                                "<strong>Bước 3:</strong> Mặt phẳng $(MNP)$ chứa hai đường thẳng cắt nhau $MN, NP$ cùng song song với $(ABCD)$ nên $(MNP) \\parallel (ABCD)$. Tương tự $(NPQ) \\parallel (ABCD)$, suy ra 4 điểm $M, N, P, Q$ đồng phẳng và $(MNPQ) \\parallel (ABCD)$."
+                            ]
+                        },
+                        quiz: {
+                            question: "Mệnh đề nào sau đây là ĐÚNG về hình hộp $ABCD.A'B'C'D'$?",
+                            options: ["Bốn đường chéo của hình hộp luôn bằng nhau", "Các mặt bên của hình hộp luôn là hình chữ nhật", "Bốn đường chéo của hình hộp đồng quy tại trung điểm của mỗi đường", "Hai mặt đối diện của hình hộp cắt nhau"],
+                            correctIndex: 2,
+                            explanation: "Trong mọi hình hộp, các cặp mặt đối diện là các hình bình hành bằng nhau, và 4 đường chéo $AC', BD', CA', DB'$ cắt nhau tại trung điểm của mỗi đường."
+                        }
+                    },
+                    {
+                        id: "g11-b14-projection",
+                        title: "Bài 14: Phép Chiếu Song Song & Hình Biểu Diễn",
+                        category: "Chương IV. Quan hệ song song trong không gian (KNTT)",
+                        subtitle: "Định nghĩa phép chiếu song song, các tính chất bảo toàn và quy tắc vẽ hình biểu diễn khối không gian.",
+                        canvasMode: "space3d",
+                        defaultShape: "prism",
+                        defaultSection: true,
+                        canvasHint: "Chọn Hình hộp ABCD.A'B'C'D' để quan sát hình biểu diễn và 4 đường chéo",
+                        definitions: [
+                            `<div class="p-3.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border-l-4 border-purple-500">
+                                <strong class="text-purple-700 dark:text-purple-300">Định nghĩa phép chiếu song song:</strong> Cho mặt phẳng $(\\alpha)$ và đường thẳng $\\Delta$ cắt $(\\alpha)$. Với mỗi điểm $M$, đường thẳng qua $M$ song song (hoặc trùng) với $\\Delta$ cắt $(\\alpha)$ tại $M'$ gọi là <em>hình chiếu song song</em> của $M$ lên $(\\alpha)$ theo phương $\\Delta$.
+                            </div>`,
+                            `<p><strong>Tính chất bảo toàn (khi phương chiếu không song song với đường thẳng):</strong></p>
+                             <ul class="list-disc pl-5 space-y-1">
+                                <li>Biến ba điểm thẳng hàng thành ba điểm thẳng hàng và không làm thay đổi thứ tự.</li>
+                                <li>Biến hai đường thẳng song song thành hai đường thẳng song song hoặc trùng nhau.</li>
+                                <li><strong>Giữ nguyên tỉ số độ dài</strong> của hai đoạn thẳng cùng nằm trên một đường thẳng hoặc trên hai đường thẳng song song.</li>
+                             </ul>`,
+                            `<p><strong>Quy tắc vẽ hình biểu diễn:</strong> Hình vuông, hình chữ nhật, hình thoi, hình bình hành được biểu diễn bởi <em>hình bình hành</em>; hình tròn được biểu diễn bởi <em>hình elip</em>; tam giác (đều, cân, vuông) được biểu diễn bởi <em>tam giác</em>.</p>`
+                        ],
+                        formulas: [
+                            { name: "Bảo toàn tỉ số đoạn thẳng", tex: "\\frac{AB}{CD} = \\frac{A'B'}{C'D'} \\quad (AB \\parallel CD)" },
+                            { name: "Hình biểu diễn hình bình hành", tex: "ABCD \\xrightarrow{\\text{chiếu //}} A'B'C'D' \\text{ (hình bình hành)}" },
+                            { name: "Hình biểu diễn hình thang", tex: "AB \\parallel CD \\Rightarrow A'B' \\parallel C'D', \\; \\frac{AB}{CD} = \\frac{A'B'}{C'D'}" },
+                            { name: "Hình biểu diễn hình tròn", tex: "\\text{Đường tròn } (O; R) \\xrightarrow{\\text{chiếu //}} \\text{Hình Elip}" }
+                        ],
+                        latexRaw: "\\frac{AB}{CD} = \\frac{A'B'}{C'D'}",
+                        example: {
+                            problem: "(Ví dụ 3 - SGK Toán 11 KNTT) Cho $\\triangle ABC$ có $M$ là trung điểm của $BC$. Một phép chiếu song song biến $\\triangle ABC$ thành $\\triangle A'B'C'$, biến $M$ thành $M'$. Chứng minh $A'M'$ là đường trung tuyến của $\\triangle A'B'C'$.",
+                            steps: [
+                                "<strong>Bước 1:</strong> Vì $M$ là trung điểm của $BC$ nên $B, M, C$ thẳng hàng theo thứ tự đó và $\\frac{BM}{MC} = 1$.",
+                                "<strong>Bước 2:</strong> Phép chiếu song song bảo toàn thứ tự thẳng hàng và tỉ số độ dài nên $B', M', C'$ thẳng hàng và $\\frac{B'M'}{M'C'} = \\frac{BM}{MC} = 1$.",
+                                "<strong>Bước 3:</strong> Suy ra $M'$ là trung điểm của $B'C'$, do đó $A'M'$ là đường trung tuyến của $\\triangle A'B'C'$."
+                            ]
+                        },
+                        quiz: {
+                            question: "Qua phép chiếu song song lên mặt phẳng $(\\alpha)$ (phương chiếu không song song với mặt phẳng hình), hình biểu diễn của một hình vuông KHÔNG THỂ là hình nào sau đây?",
+                            options: ["Hình vuông", "Hình chữ nhật", "Hình bình hành", "Hình thang có hai đáy không bằng nhau"],
+                            correctIndex: 3,
+                            explanation: "Phép chiếu song song giữ nguyên tính chất song song và tỉ số độ dài trên hai đường thẳng song song, nên hình vuông (có 2 cặp cạnh đối song song và bằng nhau) luôn có ảnh là một hình bình hành (bao gồm cả hình chữ nhật, hình vuông, hình thoi), không bao giờ là hình thang có 2 đáy không bằng nhau."
                         }
                     }
                 ]
@@ -521,33 +610,46 @@
                 badgeColor: "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
                 topics: [
                     {
-                        id: "g12-oxyz-integral",
-                        title: "Hệ Tọa Độ Oxyz & Ứng Dụng Tích Phân Hình Học",
-                        category: "Hình học giải tích không gian & Giải tích",
-                        subtitle: "Phương trình mặt phẳng, mặt cầu trong Oxyz và công thức tính thể tích vật thể tròn xoay.",
-                        canvasMode: "solid-revolution",
-                        canvasHint: "Kéo thanh trượt cận b hoặc điểm trên đồ thị để xem diện tích hình phẳng quay quanh Ox",
+                        id: "g12-oxyz-sphere",
+                        title: "Hệ Tọa Độ Oxyz & Phương Trình Mặt Cầu Trong Không Gian",
+                        category: "Hình học giải tích không gian Oxyz",
+                        subtitle: "Tọa độ điểm và vectơ trong Oxyz, phương trình mặt phẳng, phương trình đường thẳng và vị trí tương đối giữa điểm M với mặt cầu (S).",
+                        canvasMode: "oxyz-sphere",
+                        canvasHint: "Nhập tâm I(x₀, y₀, z₀), bán kính R và điểm M để xét vị trí tương đối",
                         definitions: [
                             `<div class="p-3.5 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border-l-4 border-rose-500">
-                                <strong class="text-rose-700 dark:text-rose-300">Phương trình mặt cầu trong $Oxyz$:</strong> Mặt cầu $(S)$ tâm $I(a; b; c)$, bán kính $R$ có phương trình: $(x - a)^2 + (y - b)^2 + (z - c)^2 = R^2$.
+                                <strong class="text-rose-700 dark:text-rose-300">Phương trình mặt cầu trong $Oxyz$:</strong> Mặt cầu $(S)$ có tâm $I(x_0; y_0; z_0)$ và bán kính $R > 0$ có phương trình:
+                                $$(x - x_0)^2 + (y - y_0)^2 + (z - z_0)^2 = R^2$$
                             </div>`,
-                            `<p><strong>Phương trình mặt phẳng $(P)$:</strong> Đi qua $M_0(x_0; y_0; z_0)$ và nhận $\\vec{n} = (A; B; C) \\neq \\vec{0}$ làm vectơ pháp tuyến có dạng: $A(x - x_0) + B(y - y_0) + C(z - z_0) = 0$.</p>
-                             <p><strong>Thể tích khối tròn xoay:</strong> Khi quay hình phẳng giới hạn bởi $y = f(x)$, trục $Ox$ và hai đường thẳng $x = a, x = b$ quanh trục $Ox$.</p>`
+                            `<ul class="list-disc pl-5 space-y-1.5">
+                                <li><strong>Vị trí tương đối của điểm $M(x_M; y_M; z_M)$ với mặt cầu $(S)$:</strong>
+                                    <br>• $IM < R \\iff M$ nằm <strong>bên trong</strong> mặt cầu $(S)$.
+                                    <br>• $IM = R \\iff M$ nằm <strong>trên</strong> mặt cầu $(S)$.
+                                    <br>• $IM > R \\iff M$ nằm <strong>bên ngoài</strong> mặt cầu $(S)$.
+                                </li>
+                                <li><strong>Phương trình mặt phẳng $(P)$:</strong> $A(x - x_0) + B(y - y_0) + C(z - z_0) = 0$.</li>
+                            </ul>`
                         ],
                         formulas: [
-                            { name: "Diện tích hình phẳng", tex: "S = \\int_{a}^{b} |f(x) - g(x)|\\,dx" },
-                            { name: "Thể tích tròn xoay quanh Ox", tex: "V = \\pi \\int_{a}^{b} [f(x)]^2\\,dx" },
-                            { name: "Khoảng cách từ điểm đến (P)", tex: "d(M_0, (P)) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}" },
-                            { name: "Diện tích & Thể tích mặt cầu", tex: "S_{\\text{cầu}} = 4\\pi R^2, \\quad V_{\\text{cầu}} = \\frac{4}{3}\\pi R^3" }
+                            { name: "Phương trình mặt cầu tâm I", tex: "(x - x_0)^2 + (y - y_0)^2 + (z - z_0)^2 = R^2" },
+                            { name: "Khoảng cách IM trong Oxyz", tex: "IM = \\sqrt{(x_M - x_0)^2 + (y_M - y_0)^2 + (z_M - z_0)^2}" },
+                            { name: "Khoảng cách điểm đến (P)", tex: "d(M_0, (P)) = \\frac{|Ax_0 + By_0 + Cz_0 + D|}{\\sqrt{A^2 + B^2 + C^2}}" },
+                            { name: "Phương trình chính tắc đường thẳng", tex: "\\frac{x - x_0}{a} = \\frac{y - y_0}{b} = \\frac{z - z_0}{c}" }
                         ],
-                        latexRaw: "S = \\int_{a}^{b} |f(x) - g(x)|\\,dx; \\quad V = \\pi \\int_{a}^{b} [f(x)]^2\\,dx",
+                        latexRaw: "(x - x_0)^2 + (y - y_0)^2 + (z - z_0)^2 = R^2; \\quad IM = \\sqrt{(x_M - x_0)^2 + (y_M - y_0)^2 + (z_M - z_0)^2}",
                         example: {
-                            problem: "Tính thể tích $V$ của khối tròn xoay tạo thành khi quay hình phẳng giới hạn bởi đồ thị hàm số $y = \\sqrt{x}$, trục hoành $Ox$ và hai đường thẳng $x = 0, x = 4$ quanh trục $Ox$.",
+                            problem: "Trong không gian $Oxyz$, cho mặt cầu $(S)$ tâm $I(1; -2; 2)$, bán kính $R = 5$ và điểm $M(4; 2; 2)$. Viết phương trình mặt cầu $(S)$ và xét vị trí tương đối của điểm $M$ đối với $(S)$.",
                             steps: [
-                                "<strong>Bước 1 (Thiết lập công thức tích phân):</strong> Áp dụng công thức tính thể tích vật thể tròn xoay quanh trục $Ox$: $$V = \\pi \\int_{0}^{4} (\\sqrt{x})^2\\,dx = \\pi \\int_{0}^{4} x\\,dx$$",
-                                "<strong>Bước 2 (Tìm nguyên hàm & Thế cận):</strong> $$V = \\pi \\left. \\frac{x^2}{2} \\right|_{0}^{4} = \\pi \\left( \\frac{4^2}{2} - \\frac{0^2}{2} \\right)$$",
-                                "<strong>Bước 3 (Kết quả):</strong> $$V = 8\\pi \\text{ (đvtt)}$$"
+                                "<strong>Bước 1 (Phương trình mặt cầu):</strong> $(S): (x - 1)^2 + (y + 2)^2 + (z - 2)^2 = 25$.",
+                                "<strong>Bước 2 (Tính khoảng cách IM):</strong> $IM = \\sqrt{(4 - 1)^2 + (2 - (-2))^2 + (2 - 2)^2} = \\sqrt{3^2 + 4^2 + 0^2} = 5$.",
+                                "<strong>Bước 3 (Kết luận):</strong> Vì $IM = R = 5$ nên điểm $M$ nằm <strong>trên</strong> mặt cầu $(S)$."
                             ]
+                        },
+                        quiz: {
+                            question: "Trong không gian $Oxyz$, tâm $I$ và bán kính $R$ của mặt cầu $(S): (x - 1)^2 + (y + 2)^2 + z^2 = 9$ là:",
+                            options: ["$I(1; -2; 0), \\; R = 9$", "$I(-1; 2; 0), \\; R = 3$", "$I(1; -2; 0), \\; R = 3$", "$I(1; 2; 0), \\; R = 3$"],
+                            correctIndex: 2,
+                            explanation: "So sánh với $(x-x_0)^2 + (y-y_0)^2 + (z-z_0)^2 = R^2$, ta có tâm $I(1; -2; 0)$ và $R = \\sqrt{9} = 3$."
                         }
                     }
                 ]
@@ -555,10 +657,33 @@
         ];
 
         // ==========================================
-        // QUẢN LÝ TRẠNG THÁI ỨNG DỤNG
+        // QUẢN LÝ TRẠNG THÁI ỨNG DỤNG & DỮ LIỆU NHẬP CỦA NGƯỜI DÙNG
         // ==========================================
-        let currentTopic = curriculumData[2].topics[0]; // Mặc định mở Lớp 8 - Định lý Py-ta-go
+        let currentTopic = curriculumData[3].topics[0]; // Mặc định mở Lớp 11 - Bài 10
         let revealedStepsCount = 0;
+
+        // Trạng thái hình học và thông số người dùng nhập cho từng chế độ
+        let simState = {
+            mode: 'space3d',
+            // Lớp 6-7: 3 cạnh tam giác a, b, c
+            tri: { a: 10, b: 8, c: 6 },
+            // Lớp 8-9: Bán kính R, góc ở tâm alpha (độ), góc điểm nội tiếp C (rad)
+            circle: { R: 6, alpha: 90, cAngle: -Math.PI * 0.75 },
+            // Lớp 10: Tọa độ 3 điểm A, B, C trên Oxy
+            oxy: { ax: 1, ay: 1, bx: 5, by: 1, cx: 2, cy: 5 },
+            // Lớp 11: Hình khối 3D, tỉ số k = SM/SA, bật/tắt thiết diện & đường cao/chéo
+            space3d: {
+                shape: 'pyramid', // 'pyramid' | 'tetrahedron' | 'prism'
+                k: 0.5,
+                showSection: true,
+                showAux: true,
+                yaw: 0.55,
+                pitch: 0.38
+            },
+            // Lớp 12: Tâm I(x0, y0, z0), bán kính R, điểm M(xm, ym, zm)
+            sphere: { x0: 1, y0: -2, z0: 2, R: 5, xm: 4, ym: 2, zm: 2, yaw: 0.6, pitch: 0.35 },
+            draggingTarget: null
+        };
 
         // ==========================================
         // RENDER SIDEBAR CÂY THƯ MỤC LỚP 6 - 12
@@ -600,7 +725,6 @@
                     `;
                     topicBtn.onclick = () => {
                         selectTopic(topic, gradeObj.grade);
-                        // Đóng sidebar trên mobile sau khi chọn
                         if (window.innerWidth < 1024) toggleMobileSidebar(false);
                     };
                     topicList.appendChild(topicBtn);
@@ -620,23 +744,22 @@
         }
 
         // ==========================================
-        // RENDER NỘI DUNG BÀI HỌC & KATEX
+        // RENDER NỘI DUNG BÀI HỌC & BẢNG NHẬP DỮ LIỆU ĐỀ BÀI
         // ==========================================
         function selectTopic(topic, gradeLabel) {
             currentTopic = topic;
             revealedStepsCount = 0;
 
-            // Cập nhật tiêu đề & badge
             document.getElementById('lesson-grade-badge').textContent = gradeLabel;
             document.getElementById('lesson-category').textContent = topic.category;
             document.getElementById('lesson-title').textContent = topic.title;
             document.getElementById('lesson-subtitle').textContent = topic.subtitle;
             document.getElementById('canvas-hint').textContent = topic.canvasHint;
 
-            // Thẻ 1: Định nghĩa & Định lý
+            // Thẻ 1: Kiến thức trọng tâm
             document.getElementById('card-definitions').innerHTML = topic.definitions.join('');
 
-            // Thẻ 2: Bảng công thức đóng khung
+            // Thẻ 2: Công thức
             const formulasContainer = document.getElementById('card-formulas');
             formulasContainer.innerHTML = topic.formulas.map(f => `
                 <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/90 dark:border-slate-700/80 hover:border-emerald-400 dark:hover:border-emerald-500/60 transition-colors">
@@ -645,10 +768,18 @@
                 </div>
             `).join('');
 
-            // Thẻ 4: Ví dụ mẫu có nút bấm hiện từng bước
+            // Thẻ 4 & 5: Ví dụ + Trắc nghiệm
             renderExampleSection();
+            renderQuizSection();
 
-            // Render lại công thức KaTeX toàn trang
+            // Khởi tạo chế độ Canvas & Bảng nhập dữ liệu tương ứng
+            simState.mode = topic.canvasMode;
+            if (topic.canvasMode === 'space3d') {
+                simState.space3d.shape = topic.defaultShape || 'pyramid';
+                simState.space3d.showSection = Boolean(topic.defaultSection);
+            }
+            renderInputPanel(topic.canvasMode);
+
             renderMathInElement(document.body, {
                 delimiters: [
                     {left: '$$', right: '$$', display: true},
@@ -658,9 +789,258 @@
             });
 
             renderSidebar();
-            initCanvasMode(topic.canvasMode);
+            drawCanvas();
         }
 
+        // ==========================================
+        // BẢNG NHẬP DỮ LIỆU CỦA NGƯỜI DÙNG THEO TỪNG BÀI TOÁN
+        // ==========================================
+        function renderInputPanel(mode) {
+            const panel = document.getElementById('dynamic-input-panel');
+
+            if (mode === 'triangle-solver') {
+                const { a, b, c } = simState.tri;
+                panel.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-sky-700 dark:text-sky-300 flex items-center gap-1.5">
+                            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Nhập độ dài 3 cạnh $\\triangle ABC$:
+                        </span>
+                        <div class="flex gap-1">
+                            <button type="button" onclick="applyPresetTri(10,8,6)" class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold hover:bg-sky-50">Vuông (10,8,6)</button>
+                            <button type="button" onclick="applyPresetTri(7,7,7)" class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold hover:bg-sky-50">Đều (7,7,7)</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-4 gap-2 items-end">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-500 mb-0.5">Cạnh $a$ (BC)</label>
+                            <input type="number" id="inp-tri-a" step="0.5" min="0.5" value="${a}" class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-500 mb-0.5">Cạnh $b$ (AC)</label>
+                            <input type="number" id="inp-tri-b" step="0.5" min="0.5" value="${b}" class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-blue-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-500 mb-0.5">Cạnh $c$ (AB)</label>
+                            <input type="number" id="inp-tri-c" step="0.5" min="0.5" value="${c}" class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-blue-500 outline-none">
+                        </div>
+                        <button id="btn-apply-tri" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-xs transition-all">Vẽ hình</button>
+                    </div>
+                    <p id="tri-error-msg" class="hidden text-[11px] font-semibold text-rose-600 dark:text-rose-400"></p>
+                `;
+                document.getElementById('btn-apply-tri').onclick = () => {
+                    const na = parseFloat(document.getElementById('inp-tri-a').value);
+                    const nb = parseFloat(document.getElementById('inp-tri-b').value);
+                    const nc = parseFloat(document.getElementById('inp-tri-c').value);
+                    const errEl = document.getElementById('tri-error-msg');
+                    if (!(na > 0 && nb > 0 && nc > 0 && na + nb > nc && na + nc > nb && nb + nc > na)) {
+                        errEl.textContent = "⚠ Lỗi: 3 cạnh không thỏa mãn bất đẳng thức tam giác (tổng 2 cạnh phải lớn hơn cạnh còn lại)!";
+                        errEl.classList.remove('hidden');
+                        return;
+                    }
+                    errEl.classList.add('hidden');
+                    simState.tri = { a: na, b: nb, c: nc };
+                    drawCanvas();
+                };
+            }
+            else if (mode === 'circle-solver') {
+                const { R, alpha } = simState.circle;
+                panel.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 flex items-center gap-1.5">
+                            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Nhập thông số Đường tròn $(O; R)$:
+                        </span>
+                        <div class="flex gap-1">
+                            <button type="button" onclick="applyPresetCircle(6, 90)" class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">90°</button>
+                            <button type="button" onclick="applyPresetCircle(6, 120)" class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">120°</button>
+                            <button type="button" onclick="applyPresetCircle(6, 180)" class="text-[10px] px-2 py-0.5 rounded bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 font-semibold">180° (Đ.kính)</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 items-end">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-500 mb-0.5">Bán kính $R$</label>
+                            <input type="number" id="inp-cir-r" step="0.5" min="1" max="100" value="${R}" class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-indigo-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-500 mb-0.5">Góc ở tâm $\\alpha^\\circ$</label>
+                            <input type="number" id="inp-cir-a" step="5" min="10" max="350" value="${alpha}" class="w-full px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 focus:border-indigo-500 outline-none">
+                        </div>
+                        <button id="btn-apply-cir" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-xs transition-all">Áp dụng</button>
+                    </div>
+                `;
+                document.getElementById('btn-apply-cir').onclick = () => {
+                    const nr = Math.max(0.5, parseFloat(document.getElementById('inp-cir-r').value) || 6);
+                    const na = Math.max(5, Math.min(355, parseFloat(document.getElementById('inp-cir-a').value) || 90));
+                    simState.circle.R = nr;
+                    simState.circle.alpha = na;
+                    drawCanvas();
+                };
+            }
+            else if (mode === 'oxy-solver') {
+                const { ax, ay, bx, by, cx, cy } = simState.oxy;
+                panel.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-violet-700 dark:text-violet-300 flex items-center gap-1.5">
+                            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Nhập tọa độ 3 điểm trên $Oxy$:
+                        </span>
+                        <button id="btn-apply-oxy" class="px-2.5 py-1 rounded-lg bg-violet-600 hover:bg-violet-700 text-white text-[11px] font-bold shadow-xs">Vẽ trên Oxy</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                        <div class="p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                            <div class="text-[10px] font-bold text-rose-500 mb-1">Điểm $A(x_A; y_A)$</div>
+                            <div class="flex gap-1">
+                                <input type="number" id="inp-oxy-ax" step="0.5" value="${ax}" class="w-1/2 px-1.5 py-1 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                                <input type="number" id="inp-oxy-ay" step="0.5" value="${ay}" class="w-1/2 px-1.5 py-1 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                            </div>
+                        </div>
+                        <div class="p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                            <div class="text-[10px] font-bold text-blue-500 mb-1">Điểm $B(x_B; y_B)$</div>
+                            <div class="flex gap-1">
+                                <input type="number" id="inp-oxy-bx" step="0.5" value="${bx}" class="w-1/2 px-1.5 py-1 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                                <input type="number" id="inp-oxy-by" step="0.5" value="${by}" class="w-1/2 px-1.5 py-1 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                            </div>
+                        </div>
+                        <div class="p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                            <div class="text-[10px] font-bold text-emerald-500 mb-1">Điểm $C(x_C; y_C)$</div>
+                            <div class="flex gap-1">
+                                <input type="number" id="inp-oxy-cx" step="0.5" value="${cx}" class="w-1/2 px-1.5 py-1 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                                <input type="number" id="inp-oxy-cy" step="0.5" value="${cy}" class="w-1/2 px-1.5 py-1 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('btn-apply-oxy').onclick = () => {
+                    simState.oxy = {
+                        ax: parseFloat(document.getElementById('inp-oxy-ax').value) || 0,
+                        ay: parseFloat(document.getElementById('inp-oxy-ay').value) || 0,
+                        bx: parseFloat(document.getElementById('inp-oxy-bx').value) || 0,
+                        by: parseFloat(document.getElementById('inp-oxy-by').value) || 0,
+                        cx: parseFloat(document.getElementById('inp-oxy-cx').value) || 0,
+                        cy: parseFloat(document.getElementById('inp-oxy-cy').value) || 0
+                    };
+                    drawCanvas();
+                };
+            }
+            else if (mode === 'space3d') {
+                const { shape, k, showSection, showAux } = simState.space3d;
+                panel.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-1.5">
+                        <span class="text-xs font-bold text-fuchsia-700 dark:text-fuchsia-300 flex items-center gap-1">
+                            <i data-lucide="box" class="w-3.5 h-3.5"></i> Dựng hình 3D:
+                        </span>
+                        <div class="flex gap-1">
+                            <button type="button" onclick="setSpace3DShape('pyramid')" class="px-2 py-1 rounded-lg text-[11px] font-bold ${shape === 'pyramid' ? 'bg-fuchsia-600 text-white' : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700'}">Chóp S.ABCD</button>
+                            <button type="button" onclick="setSpace3DShape('tetrahedron')" class="px-2 py-1 rounded-lg text-[11px] font-bold ${shape === 'tetrahedron' ? 'bg-fuchsia-600 text-white' : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700'}">Tứ diện S.ABC</button>
+                            <button type="button" onclick="setSpace3DShape('prism')" class="px-2 py-1 rounded-lg text-[11px] font-bold ${shape === 'prism' ? 'bg-fuchsia-600 text-white' : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700'}">Hình hộp</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-2 items-center pt-1">
+                        <div class="col-span-5">
+                            <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Tỉ số cắt $k = \\frac{SM}{SA}$:</label>
+                            <div class="flex gap-1">
+                                <input type="number" id="inp-3d-k" step="0.05" min="0.15" max="0.85" value="${k}" class="w-full px-2 py-1 text-xs font-mono font-bold rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 outline-none">
+                                <button id="btn-apply-3d-k" class="px-2 py-1 rounded-lg bg-fuchsia-600 text-white text-[11px] font-bold">Đặt</button>
+                            </div>
+                        </div>
+                        <div class="col-span-7 flex flex-col gap-1 pl-2 border-l border-slate-200 dark:border-slate-700">
+                            <label class="inline-flex items-center gap-1.5 text-[11px] font-semibold cursor-pointer">
+                                <input type="checkbox" id="chk-3d-section" ${showSection ? 'checked' : ''} class="rounded text-fuchsia-600">
+                                <span>${shape === 'prism' ? 'Hiện 4 đường chéo đồng quy' : 'Thiết diện (MNPQ) ∥ mặt đáy'}</span>
+                            </label>
+                            <label class="inline-flex items-center gap-1.5 text-[11px] font-semibold cursor-pointer">
+                                <input type="checkbox" id="chk-3d-aux" ${showAux ? 'checked' : ''} class="rounded text-fuchsia-600">
+                                <span>Hiện đường trung tuyến / giao tuyến phụ</span>
+                            </label>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('btn-apply-3d-k').onclick = () => {
+                    const nk = Math.max(0.15, Math.min(0.85, parseFloat(document.getElementById('inp-3d-k').value) || 0.5));
+                    simState.space3d.k = nk;
+                    simState.space3d.showSection = true;
+                    document.getElementById('chk-3d-section').checked = true;
+                    drawCanvas();
+                };
+                document.getElementById('chk-3d-section').onchange = (e) => {
+                    simState.space3d.showSection = e.target.checked;
+                    drawCanvas();
+                };
+                document.getElementById('chk-3d-aux').onchange = (e) => {
+                    simState.space3d.showAux = e.target.checked;
+                    drawCanvas();
+                };
+            }
+            else if (mode === 'oxyz-sphere') {
+                const { x0, y0, z0, R, xm, ym, zm } = simState.sphere;
+                panel.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-rose-700 dark:text-rose-300 flex items-center gap-1.5">
+                            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Nhập Mặt cầu $(S)$ & Điểm $M$ trong $Oxyz$:
+                        </span>
+                        <button id="btn-apply-sphere" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-[11px] font-bold shadow-xs">Xét vị trí</button>
+                    </div>
+                    <div class="grid grid-cols-12 gap-1.5 text-[11px]">
+                        <div class="col-span-5 p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                            <div class="font-bold text-rose-500 mb-1">Tâm $I(x_0; y_0; z_0)$</div>
+                            <div class="grid grid-cols-3 gap-1">
+                                <input type="number" id="inp-sp-x0" value="${x0}" class="px-1 py-0.5 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                                <input type="number" id="inp-sp-y0" value="${y0}" class="px-1 py-0.5 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                                <input type="number" id="inp-sp-z0" value="${z0}" class="px-1 py-0.5 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                            </div>
+                        </div>
+                        <div class="col-span-2 p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                            <div class="font-bold text-amber-500 mb-1">B.kính $R$</div>
+                            <input type="number" id="inp-sp-r" min="0.5" step="0.5" value="${R}" class="w-full px-1 py-0.5 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                        </div>
+                        <div class="col-span-5 p-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
+                            <div class="font-bold text-blue-500 mb-1">Điểm $M(x_M; y_M; z_M)$</div>
+                            <div class="grid grid-cols-3 gap-1">
+                                <input type="number" id="inp-sp-xm" value="${xm}" class="px-1 py-0.5 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                                <input type="number" id="inp-sp-ym" value="${ym}" class="px-1 py-0.5 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                                <input type="number" id="inp-sp-zm" value="${zm}" class="px-1 py-0.5 font-mono font-bold rounded bg-slate-100 dark:bg-slate-800 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('btn-apply-sphere').onclick = () => {
+                    simState.sphere.x0 = parseFloat(document.getElementById('inp-sp-x0').value) || 0;
+                    simState.sphere.y0 = parseFloat(document.getElementById('inp-sp-y0').value) || 0;
+                    simState.sphere.z0 = parseFloat(document.getElementById('inp-sp-z0').value) || 0;
+                    simState.sphere.R = Math.max(0.5, parseFloat(document.getElementById('inp-sp-r').value) || 5);
+                    simState.sphere.xm = parseFloat(document.getElementById('inp-sp-xm').value) || 0;
+                    simState.sphere.ym = parseFloat(document.getElementById('inp-sp-ym').value) || 0;
+                    simState.sphere.zm = parseFloat(document.getElementById('inp-sp-zm').value) || 0;
+                    drawCanvas();
+                };
+            }
+
+            lucide.createIcons();
+            renderMathInElement(panel, {
+                delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+                throwOnError: false
+            });
+        }
+
+        // Các hàm trợ giúp cho nút chọn nhanh (Preset)
+        window.applyPresetTri = (a, b, c) => {
+            simState.tri = { a, b, c };
+            renderInputPanel('triangle-solver');
+            drawCanvas();
+        };
+        window.applyPresetCircle = (R, alpha) => {
+            simState.circle.R = R;
+            simState.circle.alpha = alpha;
+            renderInputPanel('circle-solver');
+            drawCanvas();
+        };
+        window.setSpace3DShape = (shape) => {
+            simState.space3d.shape = shape;
+            renderInputPanel('space3d');
+            drawCanvas();
+        };
+
+        // ==========================================
+        // RENDER VÍ DỤ MẪU & TRẮC NGHIỆM
+        // ==========================================
         function renderExampleSection() {
             const ex = currentTopic.example;
             const container = document.getElementById('card-example');
@@ -668,7 +1048,7 @@
             let stepsHtml = '';
             for (let i = 0; i < revealedStepsCount; i++) {
                 stepsHtml += `
-                    <div class="p-3.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/25 border border-emerald-200/80 dark:border-emerald-800/50 text-sm text-slate-800 dark:text-slate-200 animate-fadeIn">
+                    <div class="p-3.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/25 border border-emerald-200/80 dark:border-emerald-800/50 text-sm text-slate-800 dark:text-slate-200">
                         ${ex.steps[i]}
                     </div>
                 `;
@@ -681,9 +1061,7 @@
                     <span class="inline-block px-2 py-0.5 rounded bg-amber-500 text-white text-xs font-bold mr-2">Đề bài</span>
                     ${ex.problem}
                 </div>
-                <div class="space-y-2.5">
-                    ${stepsHtml}
-                </div>
+                <div class="space-y-2.5">${stepsHtml}</div>
                 <div class="flex flex-wrap items-center gap-2 pt-1">
                     ${hasMoreSteps ? `
                         <button id="next-step-btn" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-blue-500/20 flex items-center gap-1.5 transition-all">
@@ -697,7 +1075,7 @@
                     `}
                     ${revealedStepsCount > 0 ? `
                         <button id="hide-steps-btn" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-medium transition-colors">
-                            Thu gọn lời giải
+                            Thu gọn
                         </button>
                     ` : ''}
                 </div>
@@ -730,8 +1108,64 @@
             }
         }
 
+        function renderQuizSection() {
+            const q = currentTopic.quiz;
+            const container = document.getElementById('card-quiz');
+            const badge = document.getElementById('quiz-score-badge');
+            badge.textContent = "Chọn 1 đáp án";
+            badge.className = "text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300";
+
+            const labels = ['A', 'B', 'C', 'D'];
+            container.innerHTML = `
+                <p class="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-100">${q.question}</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="quiz-options">
+                    ${q.options.map((opt, idx) => `
+                        <button data-idx="${idx}" class="quiz-opt-btn text-left p-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 bg-slate-50/70 dark:bg-slate-800/50 text-sm transition-all flex items-center gap-2.5">
+                            <span class="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 flex items-center justify-center text-xs font-bold shrink-0">${labels[idx]}</span>
+                            <span>${opt}</span>
+                        </button>
+                    `).join('')}
+                </div>
+                <div id="quiz-feedback" class="hidden p-3.5 rounded-xl text-xs sm:text-sm"></div>
+            `;
+
+            document.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+                btn.onclick = () => {
+                    const chosen = parseInt(btn.dataset.idx);
+                    const isCorrect = chosen === q.correctIndex;
+                    const feedback = document.getElementById('quiz-feedback');
+                    
+                    document.querySelectorAll('.quiz-opt-btn').forEach((b, i) => {
+                        b.disabled = true;
+                        b.classList.remove('hover:border-blue-500');
+                        if (i === q.correctIndex) {
+                            b.classList.add('border-emerald-500', 'bg-emerald-50', 'dark:bg-emerald-950/40', 'text-emerald-800', 'dark:text-emerald-200', 'font-semibold');
+                        } else if (i === chosen && !isCorrect) {
+                            b.classList.add('border-rose-500', 'bg-rose-50', 'dark:bg-rose-950/40', 'text-rose-800', 'dark:text-rose-200');
+                        }
+                    });
+
+                    badge.textContent = isCorrect ? "Chính xác (+10đ)" : "Chưa chính xác";
+                    badge.className = isCorrect 
+                        ? "text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
+                        : "text-xs font-bold px-2.5 py-1 rounded-lg bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300";
+
+                    feedback.classList.remove('hidden');
+                    feedback.className = isCorrect 
+                        ? "p-3.5 rounded-xl text-xs sm:text-sm bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200"
+                        : "p-3.5 rounded-xl text-xs sm:text-sm bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200";
+                    feedback.innerHTML = `<strong>${isCorrect ? 'Tuyệt vời!' : 'Giải thích:'}</strong> ${q.explanation}`;
+
+                    renderMathInElement(feedback, {
+                        delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
+                        throwOnError: false
+                    });
+                };
+            });
+        }
+
         // ==========================================
-        // TÌM KIẾM NHANH CÔNG THỨC (CHEAT SHEET SEARCH)
+        // TÌM KIẾM NHANH CÔNG THỨC
         // ==========================================
         const searchInput = document.getElementById('formula-search');
         const searchResultsBox = document.getElementById('search-results');
@@ -747,7 +1181,7 @@
             curriculumData.forEach(g => {
                 g.topics.forEach(t => {
                     if (t.title.toLowerCase().includes(query) || t.subtitle.toLowerCase().includes(query)) {
-                        matches.push({ grade: g.grade, topic: t, matchType: 'Chuyên đề', detail: t.subtitle });
+                        matches.push({ grade: g.grade, topic: t, matchType: t.title, detail: t.subtitle });
                     }
                     t.formulas.forEach(f => {
                         if (f.name.toLowerCase().includes(query) || f.tex.toLowerCase().includes(query)) {
@@ -758,9 +1192,9 @@
             });
 
             if (matches.length === 0) {
-                searchResultsBox.innerHTML = `<div class="p-4 text-center text-xs text-slate-500">Không tìm thấy công thức phù hợp với "${e.target.value}"</div>`;
+                searchResultsBox.innerHTML = `<div class="p-4 text-center text-xs text-slate-500">Không tìm thấy nội dung phù hợp với "${e.target.value}"</div>`;
             } else {
-                searchResultsBox.innerHTML = matches.slice(0, 6).map((m, idx) => `
+                searchResultsBox.innerHTML = matches.slice(0, 7).map((m, idx) => `
                     <button data-idx="${idx}" class="search-item-btn w-full text-left p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border-b last:border-none border-slate-100 dark:border-slate-800/60">
                         <div class="flex items-center justify-between mb-1">
                             <span class="text-xs font-bold text-blue-600 dark:text-blue-400">${m.matchType}</span>
@@ -793,7 +1227,6 @@
             }
         });
 
-        // Phím tắt '/' để focus ô tìm kiếm
         document.addEventListener('keydown', (e) => {
             if (e.key === '/' && document.activeElement !== searchInput) {
                 e.preventDefault();
@@ -802,69 +1235,17 @@
         });
 
         // ==========================================
-        // HTML5 CANVAS TƯƠNG TÁC TRỰC QUAN ĐA CHẾ ĐỘ
+        // BỘ VẼ HÌNH HỌC TRỰC QUAN 2D & 3D THEO DỮ LIỆU NGƯỜI DÙNG
         // ==========================================
         const canvas = document.getElementById('geometry-canvas');
         const ctx = canvas.getContext('2d');
-        let canvasState = {
-            mode: 'right-triangle',
-            points: [],
-            draggingIdx: -1,
-            rotAngle: 0.55 // Cho khối chóp 3D lớp 11
-        };
 
         function resizeCanvas() {
             const rect = canvas.parentElement.getBoundingClientRect();
             const dpr = window.devicePixelRatio || 1;
             canvas.width = rect.width * dpr;
             canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
-            drawCanvas();
-        }
-
-        function initCanvasMode(mode) {
-            canvasState.mode = mode;
-            const rect = canvas.parentElement.getBoundingClientRect();
-            const w = rect.width || 380;
-            const h = rect.height || 380;
-
-            if (mode === 'right-triangle') {
-                // C là góc vuông cố định góc dưới trái, A kéo dọc, B kéo ngang
-                canvasState.points = [
-                    { x: w * 0.22, y: h * 0.25, label: 'A', color: '#ef4444', lockX: true },
-                    { x: w * 0.80, y: h * 0.78, label: 'B', color: '#3b82f6', lockY: true },
-                    { x: w * 0.22, y: h * 0.78, label: 'C (90°)', color: '#10b981', fixed: true }
-                ];
-            } else if (mode === 'triangle') {
-                canvasState.points = [
-                    { x: w * 0.50, y: h * 0.22, label: 'A', color: '#ef4444' },
-                    { x: w * 0.20, y: h * 0.78, label: 'B', color: '#3b82f6' },
-                    { x: w * 0.82, y: h * 0.76, label: 'C', color: '#10b981' }
-                ];
-            } else if (mode === 'angle') {
-                canvasState.points = [
-                    { x: w * 0.75, y: h * 0.30, label: 'x', color: '#ef4444' },
-                    { x: w * 0.28, y: h * 0.72, label: 'O', color: '#64748b', fixed: true },
-                    { x: w * 0.85, y: h * 0.72, label: 'y', color: '#3b82f6', fixed: true }
-                ];
-            } else if (mode === 'circle') {
-                canvasState.points = [
-                    { x: w * 0.5 + w * 0.32 * Math.cos(-Math.PI / 3), y: h * 0.5 + w * 0.32 * Math.sin(-Math.PI / 3), label: 'C', color: '#ef4444', onCircle: true }
-                ];
-            } else if (mode === 'oxy') {
-                const cx = w * 0.5, cy = h * 0.5, step = w / 12;
-                canvasState.points = [
-                    { x: cx + 3 * step, y: cy - 4 * step, label: 'u', color: '#ef4444' },
-                    { x: cx - 4 * step, y: cy - 3 * step, label: 'v', color: '#3b82f6' }
-                ];
-            } else if (mode === 'pyramid3d') {
-                canvasState.points = [];
-                canvasState.rotAngle = 0.55;
-            } else if (mode === 'solid-revolution') {
-                canvasState.points = [
-                    { x: w * 0.75, y: h * 0.5, label: 'b', color: '#ef4444', lockY: true }
-                ];
-            }
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             drawCanvas();
         }
 
@@ -876,8 +1257,8 @@
 
             ctx.clearRect(0, 0, w, h);
 
-            // Vẽ lưới tọa độ nền nhẹ nhàng
-            ctx.strokeStyle = isDark ? 'rgba(51, 65, 85, 0.35)' : 'rgba(203, 213, 225, 0.5)';
+            // Lưới nền toán học
+            ctx.strokeStyle = isDark ? 'rgba(51, 65, 85, 0.3)' : 'rgba(203, 213, 225, 0.45)';
             ctx.lineWidth = 1;
             const gridSize = 25;
             for (let x = 0; x < w; x += gridSize) {
@@ -889,352 +1270,649 @@
 
             const metricsBox = document.getElementById('live-metrics');
 
-            if (canvasState.mode === 'right-triangle') {
-                const [A, B, C] = canvasState.points;
-                // Tô màu tam giác
-                ctx.fillStyle = isDark ? 'rgba(59, 130, 246, 0.15)' : 'rgba(59, 130, 246, 0.1)';
-                ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.lineTo(C.x, C.y); ctx.closePath(); ctx.fill();
+            // ------------------------------------------
+            // CHẾ ĐỘ 1: LỚP 6-7 - DỰNG TAM GIÁC TỪ 3 CẠNH a, b, c
+            // ------------------------------------------
+            if (simState.mode === 'triangle-solver') {
+                const { a, b, c } = simState.tri;
+                const P = a + b + c;
+                const p = P / 2;
+                const S = Math.sqrt(Math.max(0, p * (p - a) * (p - b) * (p - c)));
+                const ha = (2 * S) / a;
 
-                // Vẽ 3 cạnh
-                ctx.strokeStyle = isDark ? '#93c5fd' : '#2563eb';
-                ctx.lineWidth = 2.5;
-                ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.lineTo(C.x, C.y); ctx.closePath(); ctx.stroke();
-
-                // Ký hiệu góc vuông tại C
-                const sq = 14;
-                ctx.strokeStyle = '#10b981';
-                ctx.lineWidth = 2;
-                ctx.strokeRect(C.x, C.y - sq, sq, sq);
-
-                // Tính độ dài theo đơn vị quy ước (1 đơn vị = 30px)
-                const b = Math.abs(C.y - A.y) / 30;
-                const a = Math.abs(B.x - C.x) / 30;
-                const c = Math.hypot(a, b);
-                const area = 0.5 * a * b;
-
-                metricsBox.innerHTML = `
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">AC (b) = <strong>${b.toFixed(2)}</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">BC (a) = <strong>${a.toFixed(2)}</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400">AB (c) = <strong>${c.toFixed(2)}</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400">S = <strong>${area.toFixed(2)}</strong></div>
-                `;
-            } 
-            else if (canvasState.mode === 'triangle') {
-                const [A, B, C] = canvasState.points;
-                ctx.fillStyle = isDark ? 'rgba(20, 184, 166, 0.15)' : 'rgba(20, 184, 166, 0.1)';
-                ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.lineTo(C.x, C.y); ctx.closePath(); ctx.fill();
-
-                ctx.strokeStyle = isDark ? '#5eead4' : '#0d9488';
-                ctx.lineWidth = 2.5;
-                ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.lineTo(C.x, C.y); ctx.closePath(); ctx.stroke();
-
-                // Trọng tâm G
-                const gx = (A.x + B.x + C.x) / 3;
-                const gy = (A.y + B.y + C.y) / 3;
-                ctx.fillStyle = '#f59e0b';
-                ctx.beginPath(); ctx.arc(gx, gy, 4.5, 0, Math.PI * 2); ctx.fill();
-                ctx.font = 'bold 12px Inter';
-                ctx.fillText('G', gx + 7, gy - 5);
-
-                // Tính số đo 3 góc bằng định lý Côsin
-                const c = Math.hypot(A.x - B.x, A.y - B.y);
-                const a = Math.hypot(B.x - C.x, B.y - C.y);
-                const b = Math.hypot(A.x - C.x, A.y - C.y);
-                const angA = Math.acos(Math.max(-1, Math.min(1, (b*b + c*c - a*a) / (2*b*c)))) * 180 / Math.PI;
-                const angB = Math.acos(Math.max(-1, Math.min(1, (a*a + c*c - b*b) / (2*a*c)))) * 180 / Math.PI;
+                // Tính góc theo định lý Côsin
+                const cosA = (b*b + c*c - a*a) / (2*b*c);
+                const cosB = (a*a + c*c - b*b) / (2*a*c);
+                const cosC = (a*a + b*b - c*c) / (2*a*b);
+                const angA = Math.acos(Math.max(-1, Math.min(1, cosA))) * 180 / Math.PI;
+                const angB = Math.acos(Math.max(-1, Math.min(1, cosB))) * 180 / Math.PI;
                 const angC = 180 - angA - angB;
 
+                // Phân loại tam giác
+                let typeLabel = "Tam giác nhọn";
+                const eps = 0.05;
+                const isRight = Math.abs(angA - 90) < eps || Math.abs(angB - 90) < eps || Math.abs(angC - 90) < eps;
+                const isEqui = Math.abs(a - b) < 1e-4 && Math.abs(b - c) < 1e-4;
+                const isIso = Math.abs(a - b) < 1e-4 || Math.abs(b - c) < 1e-4 || Math.abs(a - c) < 1e-4;
+                const isObtuse = angA > 90 + eps || angB > 90 + eps || angC > 90 + eps;
+
+                if (isEqui) typeLabel = "Tam giác đều (60°)";
+                else if (isRight && isIso) typeLabel = "Tam giác vuông cân";
+                else if (isRight) typeLabel = "Tam giác vuông";
+                else if (isObtuse && isIso) typeLabel = "Tam giác tù cân";
+                else if (isObtuse) typeLabel = "Tam giác tù";
+                else if (isIso) typeLabel = "Tam giác cân";
+
+                // Tọa độ chuẩn hóa trên mặt phẳng (B tại gốc (0,0), C tại (a,0), A tại (xA, ha))
+                const xA = c * cosB;
+                const minX = Math.min(0, xA);
+                const maxX = Math.max(a, xA);
+                const spanX = maxX - minX;
+                const spanY = ha;
+                const scale = Math.min((w * 0.68) / spanX, (h * 0.62) / spanY);
+
+                const offsetX = (w - spanX * scale) / 2 - minX * scale;
+                const baseY = h * 0.78;
+
+                const ptB = { x: offsetX, y: baseY };
+                const ptC = { x: offsetX + a * scale, y: baseY };
+                const ptA = { x: offsetX + xA * scale, y: baseY - ha * scale };
+                const ptH = { x: ptA.x, y: baseY };
+
+                // Đường kéo dài đáy BC nếu chân đường cao H nằm ngoài BC (tam giác tù)
+                if (ptH.x < ptB.x || ptH.x > ptC.x) {
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = '#94a3b8';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath(); ctx.moveTo(ptB.x, ptB.y); ctx.lineTo(ptH.x, ptH.y); ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // Tô màu tam giác
+                ctx.fillStyle = isDark ? 'rgba(14, 165, 233, 0.16)' : 'rgba(14, 165, 233, 0.12)';
+                ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.lineTo(ptC.x, ptC.y); ctx.closePath(); ctx.fill();
+
+                // Vẽ 3 cạnh
+                ctx.strokeStyle = isDark ? '#38bdf8' : '#0284c7';
+                ctx.lineWidth = 2.8;
+                ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.lineTo(ptC.x, ptC.y); ctx.closePath(); ctx.stroke();
+
+                // Vẽ đường cao AH và ký hiệu góc vuông tại H
+                ctx.setLineDash([5, 4]);
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptH.x, ptH.y); ctx.stroke();
+                ctx.setLineDash([]);
+
+                const sq = 10;
+                const dir = ptH.x <= ptC.x ? 1 : -1;
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 1.6;
+                ctx.strokeRect(ptH.x, ptH.y - sq, sq * dir, sq);
+
+                // Nhãn đỉnh & độ dài cạnh
+                ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+                ctx.font = 'bold 13px "Be Vietnam Pro"';
+                ctx.fillText(`A (${angA.toFixed(0)}°)`, ptA.x - 16, ptA.y - 10);
+                ctx.fillText(`B (${angB.toFixed(0)}°)`, ptB.x - 24, ptB.y + 18);
+                ctx.fillText(`C (${angC.toFixed(0)}°)`, ptC.x - 8, ptC.y + 18);
+                ctx.fillStyle = '#ef4444';
+                ctx.fillText('H', ptH.x - 4, ptH.y + 16);
+
+                ctx.font = '600 11px "JetBrains Mono"';
+                ctx.fillStyle = isDark ? '#93c5fd' : '#1d4ed8';
+                ctx.fillText(`a=${a}`, (ptB.x + ptC.x)/2 - 14, ptB.y + 16);
+                ctx.fillText(`b=${b}`, (ptA.x + ptC.x)/2 + 6, (ptA.y + ptC.y)/2);
+                ctx.fillText(`c=${c}`, (ptA.x + ptB.x)/2 - 36, (ptA.y + ptB.y)/2);
+
                 metricsBox.innerHTML = `
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Góc A = <strong>${angA.toFixed(1)}°</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Góc B = <strong>${angB.toFixed(1)}°</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Góc C = <strong>${angC.toFixed(1)}°</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400">Tổng = <strong>180.0°</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 col-span-2 text-sky-600 dark:text-sky-400">Dạng hình: <strong>${typeLabel}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Chu vi P = <strong>${P.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400">Diện tích S = <strong>${S.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400">Đường cao hₐ = <strong>${ha.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Nửa chu vi p = <strong>${p.toFixed(2)}</strong></div>
                 `;
             }
-            else if (canvasState.mode === 'angle') {
-                const [X, O, Y] = canvasState.points;
-                const angRad = Math.atan2(O.y - X.y, X.x - O.x);
-                let deg = angRad * 180 / Math.PI;
-                if (deg < 0) deg += 360;
-                if (deg > 180) deg = 180;
 
-                // Vẽ cung góc
-                ctx.fillStyle = 'rgba(239, 68, 68, 0.18)';
+            // ------------------------------------------
+            // CHẾ ĐỘ 2: LỚP 8-9 - ĐƯỜNG TRÒN, CUNG TRÒN, GÓC NỘI TIẾP & TIẾP TUYẾN
+            // ------------------------------------------
+            else if (simState.mode === 'circle-solver') {
+                const { R, alpha, cAngle } = simState.circle;
+                const cx = w * 0.48, cy = h * 0.52, rPx = w * 0.30;
+                const radAlpha = alpha * Math.PI / 180;
+
+                const ptA = { x: cx + rPx, y: cy };
+                const ptB = { x: cx + rPx * Math.cos(-radAlpha), y: cy + rPx * Math.sin(-radAlpha) };
+                const ptC = { x: cx + rPx * Math.cos(cAngle), y: cy + rPx * Math.sin(cAngle) };
+
+                // Tô hình quạt tròn OAB
+                ctx.fillStyle = isDark ? 'rgba(99, 102, 241, 0.22)' : 'rgba(99, 102, 241, 0.15)';
                 ctx.beginPath();
-                ctx.moveTo(O.x, O.y);
-                ctx.arc(O.x, O.y, 48, -deg * Math.PI / 180, 0);
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx, cy, rPx, -radAlpha, 0);
                 ctx.closePath();
                 ctx.fill();
-
-                // Vẽ 2 tia Ox, Oy
-                ctx.strokeStyle = isDark ? '#f8fafc' : '#1e293b';
-                ctx.lineWidth = 3;
-                ctx.beginPath(); ctx.moveTo(O.x, O.y); ctx.lineTo(Y.x, Y.y); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(O.x, O.y); ctx.lineTo(X.x, X.y); ctx.stroke();
-
-                let typeText = "Góc nhọn";
-                if (Math.abs(deg - 90) < 1.5) typeText = "Góc vuông (90°)";
-                else if (Math.abs(deg - 180) < 1.5) typeText = "Góc bẹt (180°)";
-                else if (deg > 90) typeText = "Góc tù";
-
-                metricsBox.innerHTML = `
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Số đo xOy = <strong>${deg.toFixed(1)}°</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400">Loại: <strong>${typeText}</strong></div>
-                `;
-            }
-            else if (canvasState.mode === 'circle') {
-                const cx = w * 0.5, cy = h * 0.5, R = w * 0.32;
-                const A = { x: cx - R, y: cy };
-                const B = { x: cx + R, y: cy };
-                const C = canvasState.points[0];
 
                 // Vẽ đường tròn (O)
                 ctx.strokeStyle = isDark ? '#818cf8' : '#4f46e5';
                 ctx.lineWidth = 2.5;
-                ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.stroke();
+                ctx.beginPath(); ctx.arc(cx, cy, rPx, 0, Math.PI * 2); ctx.stroke();
 
-                // Đường kính AB
-                ctx.strokeStyle = '#64748b';
-                ctx.setLineDash([5, 5]);
-                ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+                // Vẽ tiếp tuyến tại A (vuông góc với OA)
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 1.8;
+                ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y - rPx * 0.7); ctx.lineTo(ptA.x, ptA.y + rPx * 0.7); ctx.stroke();
                 ctx.setLineDash([]);
+                ctx.strokeStyle = '#10b981';
+                ctx.strokeRect(ptA.x - 9, ptA.y - 9, 9, 9);
 
-                // Tam giác nội tiếp ABC
-                ctx.fillStyle = 'rgba(99, 102, 241, 0.14)';
-                ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.lineTo(C.x, C.y); ctx.closePath(); ctx.fill();
-                ctx.strokeStyle = '#ef4444';
+                // Vẽ 2 bán kính OA, OB và dây cung AB
+                ctx.strokeStyle = '#4f46e5';
                 ctx.lineWidth = 2;
-                ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(cx, cy); ctx.lineTo(ptB.x, ptB.y); ctx.stroke();
 
-                ctx.fillStyle = isDark ? '#e2e8f0' : '#1e293b';
-                ctx.font = 'bold 12px Inter';
-                ctx.fillText('O', cx - 4, cy + 16);
-                ctx.fillText('A', A.x - 16, A.y + 4);
-                ctx.fillText('B', B.x + 8, B.y + 4);
+                ctx.strokeStyle = '#f59e0b';
+                ctx.lineWidth = 2.2;
+                ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptB.x, ptB.y); ctx.stroke();
 
-                const ac = Math.hypot(C.x - A.x, C.y - A.y) / (R / 5);
-                const bc = Math.hypot(C.x - B.x, C.y - B.y) / (R / 5);
+                // Vẽ góc nội tiếp ACB
+                ctx.strokeStyle = '#ef4444';
+                ctx.lineWidth = 1.8;
+                ctx.beginPath(); ctx.moveTo(ptA.x, ptA.y); ctx.lineTo(ptC.x, ptC.y); ctx.lineTo(ptB.x, ptB.y); ctx.stroke();
+
+                // Vẽ các điểm O, A, B, C
+                [[cx, cy, 'O', '#64748b'], [ptA.x, ptA.y, 'A', '#4f46e5'], [ptB.x, ptB.y, 'B', '#f59e0b'], [ptC.x, ptC.y, 'C', '#ef4444']].forEach(([px, py, lbl, col]) => {
+                    ctx.fillStyle = col;
+                    ctx.beginPath(); ctx.arc(px, py, 5.5, 0, Math.PI * 2); ctx.fill();
+                    ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+                    ctx.font = 'bold 12px "Be Vietnam Pro"';
+                    ctx.fillText(lbl, px + 7, py - 6);
+                });
+
+                const arcLen = (Math.PI * R * alpha) / 180;
+                const sectorArea = (Math.PI * R * R * alpha) / 360;
+                const chordLen = 2 * R * Math.sin(radAlpha / 2);
 
                 metricsBox.innerHTML = `
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Bán kính R = <strong>5.00</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400">Góc ACB = <strong>90.0°</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Dây AC = <strong>${ac.toFixed(2)}</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Dây BC = <strong>${bc.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Độ dài cung l = <strong>${arcLen.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-indigo-600 dark:text-indigo-400">Diện tích S_q = <strong>${sectorArea.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400">Dây cung AB = <strong>${chordLen.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400">Góc nội tiếp = <strong>${(alpha / 2).toFixed(1)}°</strong></div>
                 `;
             }
-            else if (canvasState.mode === 'oxy') {
-                const cx = w * 0.5, cy = h * 0.5, step = w / 12;
+
+            // ------------------------------------------
+            // CHẾ ĐỘ 3: LỚP 10 - HỆ TRỤC OXY & TAM GIÁC TỌA ĐỘ
+            // ------------------------------------------
+            else if (simState.mode === 'oxy-solver') {
+                const { ax, ay, bx, by, cx, cy } = simState.oxy;
+                const maxCoord = Math.max(6, Math.abs(ax), Math.abs(ay), Math.abs(bx), Math.abs(by), Math.abs(cx), Math.abs(cy)) + 1.5;
+                const ox = w * 0.5, oy = h * 0.5;
+                const step = (w * 0.44) / maxCoord;
+
                 // Trục Ox, Oy
                 ctx.strokeStyle = isDark ? '#94a3b8' : '#475569';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath(); ctx.moveTo(10, cy); ctx.lineTo(w - 10, cy); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(cx, 10); ctx.lineTo(cx, h - 10); ctx.stroke();
+                ctx.lineWidth = 1.6;
+                ctx.beginPath(); ctx.moveTo(12, oy); ctx.lineTo(w - 12, oy); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(ox, 12); ctx.lineTo(ox, h - 12); ctx.stroke();
 
-                const [U, V] = canvasState.points;
-                drawArrow(ctx, cx, cy, U.x, U.y, '#ef4444');
-                drawArrow(ctx, cx, cy, V.x, V.y, '#3b82f6');
+                ctx.fillStyle = isDark ? '#94a3b8' : '#475569';
+                ctx.font = 'bold 11px "JetBrains Mono"';
+                ctx.fillText('x', w - 18, oy - 6);
+                ctx.fillText('y', ox + 8, 20);
+                ctx.fillText('O', ox - 14, oy + 14);
 
-                const ux = (U.x - cx) / step;
-                const uy = (cy - U.y) / step;
-                const vx = (V.x - cx) / step;
-                const vy = (cy - V.y) / step;
-                const dot = ux * vx + uy * vy;
-                const magU = Math.hypot(ux, uy);
-                const magV = Math.hypot(vx, vy);
-                const angle = (magU > 0 && magV > 0) ? Math.acos(Math.max(-1, Math.min(1, dot / (magU * magV)))) * 180 / Math.PI : 0;
+                const toPx = (x, y) => ({ x: ox + x * step, y: oy - y * step });
+                const pA = toPx(ax, ay), pB = toPx(bx, by), pC = toPx(cx, cy);
+
+                // Tô tam giác ABC
+                ctx.fillStyle = isDark ? 'rgba(139, 92, 246, 0.2)' : 'rgba(139, 92, 246, 0.14)';
+                ctx.beginPath(); ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y); ctx.lineTo(pC.x, pC.y); ctx.closePath(); ctx.fill();
+
+                ctx.strokeStyle = '#8b5cf6';
+                ctx.lineWidth = 2.5;
+                ctx.beginPath(); ctx.moveTo(pA.x, pA.y); ctx.lineTo(pB.x, pB.y); ctx.lineTo(pC.x, pC.y); ctx.closePath(); ctx.stroke();
+
+                // Trọng tâm G
+                const gx = (ax + bx + cx) / 3, gy = (ay + by + cy) / 3;
+                const pG = toPx(gx, gy);
+                ctx.fillStyle = '#f59e0b';
+                ctx.beginPath(); ctx.arc(pG.x, pG.y, 4.5, 0, Math.PI * 2); ctx.fill();
+                ctx.fillText('G', pG.x + 6, pG.y - 5);
+
+                // Vẽ 3 đỉnh A, B, C
+                [[pA, `A(${ax};${ay})`, '#ef4444'], [pB, `B(${bx};${by})`, '#3b82f6'], [pC, `C(${cx};${cy})`, '#10b981']].forEach(([pt, lbl, col]) => {
+                    ctx.fillStyle = col;
+                    ctx.beginPath(); ctx.arc(pt.x, pt.y, 6, 0, Math.PI * 2); ctx.fill();
+                    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.5; ctx.stroke();
+                    ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+                    ctx.font = 'bold 11px "Be Vietnam Pro"';
+                    ctx.fillText(lbl, pt.x + 7, pt.y - 6);
+                });
+
+                const ab = Math.hypot(bx - ax, by - ay);
+                const ac = Math.hypot(cx - ax, cy - ay);
+                const bc = Math.hypot(cx - bx, cy - by);
+                const area = 0.5 * Math.abs((bx - ax)*(cy - ay) - (cx - ax)*(by - ay));
 
                 metricsBox.innerHTML = `
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-rose-500">u = (${ux.toFixed(1)}; ${uy.toFixed(1)})</div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-blue-500">v = (${vx.toFixed(1)}; ${vy.toFixed(1)})</div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Tích u·v = <strong>${dot.toFixed(2)}</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-emerald-500">Góc (u,v) = <strong>${angle.toFixed(1)}°</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">AB = <strong>${ab.toFixed(2)}</strong>, AC = <strong>${ac.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">BC = <strong>${bc.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400">G(<strong>${gx.toFixed(2)}</strong>; <strong>${gy.toFixed(2)}</strong>)</div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-violet-600 dark:text-violet-400">Diện tích S = <strong>${area.toFixed(2)}</strong></div>
                 `;
             }
-            else if (canvasState.mode === 'pyramid3d') {
-                // Mô hình hình chóp S.ABCD xoay 3D tương tác
-                const cx = w * 0.5, cy = h * 0.62, scale = w * 0.24;
-                const ang = canvasState.rotAngle;
-                const tilt = 0.42;
+
+            // ------------------------------------------
+            // CHẾ ĐỘ 4: LỚP 11 - KHÔNG GIAN 3D (CHÓP, TỨ DIỆN, HÌNH HỘP & THIẾT DIỆN TỈ SỐ k)
+            // ------------------------------------------
+            else if (simState.mode === 'space3d') {
+                const { shape, k, showSection, showAux, yaw, pitch } = simState.space3d;
+                const cx = w * 0.5, cy = h * 0.62, scale = w * 0.25;
 
                 const project = (x, y, z) => {
-                    const rx = x * Math.cos(ang) - z * Math.sin(ang);
-                    const rz = x * Math.sin(ang) + z * Math.cos(ang);
+                    const rx = x * Math.cos(yaw) - z * Math.sin(yaw);
+                    const rz = x * Math.sin(yaw) + z * Math.cos(yaw);
                     return {
                         x: cx + rx * scale,
-                        y: cy - y * scale + rz * scale * tilt
+                        y: cy - y * scale + rz * scale * pitch,
+                        z: rz
                     };
                 };
 
-                const S = project(-0.8, 1.45, -0.8);
-                const A = project(-0.8, 0, -0.8);
-                const B = project(0.8, 0, -0.8);
-                const C = project(0.8, 0, 0.8);
-                const D = project(-0.8, 0, 0.8);
+                if (shape === 'pyramid') {
+                    const pts3D = {
+                        S: [-0.35, 1.6, -0.35],
+                        A: [-0.85, 0, -0.75],
+                        B: [0.85, 0, -0.75],
+                        C: [0.85, 0, 0.75],
+                        D: [-0.85, 0, 0.75]
+                    };
+                    const P = {};
+                    Object.keys(pts3D).forEach(key => P[key] = project(...pts3D[key]));
 
-                // Đường khuất (nét đứt) SA, AB, AD
-                ctx.setLineDash([5, 5]);
-                ctx.strokeStyle = isDark ? '#64748b' : '#94a3b8';
-                ctx.lineWidth = 1.8;
-                [ [S, A], [A, B], [A, D] ].forEach(([p1, p2]) => {
-                    ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
-                });
+                    const baseKeys = ['A', 'B', 'C', 'D'];
+                    let hiddenVertex = 'A';
+                    baseKeys.forEach(key => { if (P[key].z < P[hiddenVertex].z) hiddenVertex = key; });
 
-                // Đường nhìn thấy (nét liền)
-                ctx.setLineDash([]);
-                ctx.strokeStyle = isDark ? '#e879f9' : '#c026d3';
-                ctx.lineWidth = 2.2;
-                [ [S, B], [S, C], [S, D], [B, C], [C, D] ].forEach(([p1, p2]) => {
-                    ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
-                });
+                    const edges = [['S','A'], ['S','B'], ['S','C'], ['S','D'], ['A','B'], ['B','C'], ['C','D'], ['D','A']];
+                    edges.forEach(([u, v]) => {
+                        const isHidden = (u === hiddenVertex || v === hiddenVertex);
+                        ctx.beginPath();
+                        if (isHidden) {
+                            ctx.setLineDash([5, 5]);
+                            ctx.strokeStyle = isDark ? '#64748b' : '#94a3b8';
+                            ctx.lineWidth = 1.6;
+                        } else {
+                            ctx.setLineDash([]);
+                            ctx.strokeStyle = isDark ? '#e879f9' : '#c026d3';
+                            ctx.lineWidth = 2.3;
+                        }
+                        ctx.moveTo(P[u].x, P[u].y); ctx.lineTo(P[v].x, P[v].y); ctx.stroke();
+                    });
+                    ctx.setLineDash([]);
 
-                // Nhãn các đỉnh
-                ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
-                ctx.font = 'bold 13px Inter';
-                ctx.fillText('S', S.x - 5, S.y - 8);
-                ctx.fillText('A', A.x - 14, A.y - 4);
-                ctx.fillText('B', B.x + 6, B.y);
-                ctx.fillText('C', C.x + 6, C.y + 12);
-                ctx.fillText('D', D.x - 16, D.y + 12);
+                    // Đường chéo đáy AC, BD cắt nhau tại O (nếu bật nét phụ)
+                    if (showAux) {
+                        ctx.setLineDash([3, 3]);
+                        ctx.strokeStyle = '#64748b';
+                        ctx.lineWidth = 1.3;
+                        ctx.beginPath(); ctx.moveTo(P.A.x, P.A.y); ctx.lineTo(P.C.x, P.C.y); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(P.B.x, P.B.y); ctx.lineTo(P.D.x, P.D.y); ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
 
-                metricsBox.innerHTML = `
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Góc xoay: <strong>${((ang * 180 / Math.PI) % 360).toFixed(0)}°</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-fuchsia-600 dark:text-fuchsia-400">SA ⊥ (ABCD)</div>
-                `;
+                    // Mặt phẳng thiết diện (MNPQ) ∥ (ABCD) theo tỉ số k = SM / SA
+                    if (showSection) {
+                        const lerp = (p1, p2, t) => ({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
+                        const M = lerp(P.S, P.A, k), N = lerp(P.S, P.B, k), P_pt = lerp(P.S, P.C, k), Q = lerp(P.S, P.D, k);
+
+                        ctx.fillStyle = 'rgba(16, 185, 129, 0.24)';
+                        ctx.beginPath();
+                        ctx.moveTo(M.x, M.y); ctx.lineTo(N.x, N.y); ctx.lineTo(P_pt.x, P_pt.y); ctx.lineTo(Q.x, Q.y);
+                        ctx.closePath();
+                        ctx.fill();
+
+                        ctx.strokeStyle = '#10b981';
+                        ctx.lineWidth = 2.2;
+                        ctx.stroke();
+
+                        ctx.fillStyle = isDark ? '#6ee7b7' : '#047857';
+                        ctx.font = 'bold 11px "Be Vietnam Pro"';
+                        ctx.fillText('M', M.x - 13, M.y);
+                        ctx.fillText('N', N.x + 6, N.y);
+                        ctx.fillText('P', P_pt.x + 6, P_pt.y + 4);
+                        ctx.fillText('Q', Q.x - 13, Q.y + 4);
+                    }
+
+                    ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+                    ctx.font = 'bold 13px "Be Vietnam Pro"';
+                    ctx.fillText('S', P.S.x - 4, P.S.y - 8);
+                    ctx.fillText('A', P.A.x - 14, P.A.y);
+                    ctx.fillText('B', P.B.x + 6, P.B.y);
+                    ctx.fillText('C', P.C.x + 6, P.C.y + 12);
+                    ctx.fillText('D', P.D.x - 15, P.D.y + 12);
+
+                    metricsBox.innerHTML = `
+                        <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Tỉ số k = SM/SA = <strong>${k.toFixed(2)}</strong></div>
+                        <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400">S(MNPQ)/S(ABCD) = <strong>${(k*k).toFixed(3)}</strong></div>
+                    `;
+                } 
+                else if (shape === 'tetrahedron') {
+                    // Tứ diện S.ABC (Bài 10 & 11)
+                    const pts3D = {
+                        S: [0, 1.55, -0.15],
+                        A: [-0.85, 0, -0.55],
+                        B: [0.05, 0, 0.85],
+                        C: [0.85, 0, -0.55]
+                    };
+                    const P = {};
+                    Object.keys(pts3D).forEach(key => P[key] = project(...pts3D[key]));
+
+                    // Cạnh khuất nhất của tam giác đáy ABC
+                    const baseEdges = [['A','B'], ['B','C'], ['C','A']];
+                    let hiddenEdge = baseEdges[0];
+                    let minAvgZ = 999;
+                    baseEdges.forEach(e => {
+                        const avgZ = (P[e[0]].z + P[e[1]].z) / 2;
+                        if (avgZ < minAvgZ) { minAvgZ = avgZ; hiddenEdge = e; }
+                    });
+
+                    [['S','A'], ['S','B'], ['S','C'], ['A','B'], ['B','C'], ['C','A']].forEach(([u, v]) => {
+                        const isHidden = (u === hiddenEdge[0] && v === hiddenEdge[1]);
+                        ctx.beginPath();
+                        if (isHidden) {
+                            ctx.setLineDash([5, 5]);
+                            ctx.strokeStyle = isDark ? '#64748b' : '#94a3b8';
+                            ctx.lineWidth = 1.6;
+                        } else {
+                            ctx.setLineDash([]);
+                            ctx.strokeStyle = isDark ? '#a855f7' : '#7e22ce';
+                            ctx.lineWidth = 2.4;
+                        }
+                        ctx.moveTo(P[u].x, P[u].y); ctx.lineTo(P[v].x, P[v].y); ctx.stroke();
+                    });
+                    ctx.setLineDash([]);
+
+                    if (showAux) {
+                        // Vẽ 2 đường trung tuyến BN, CM cắt nhau tại trọng tâm G (Ví dụ 3 Bài 10)
+                        const mid = (p1, p2) => ({ x: (p1.x + p2.x)/2, y: (p1.y + p2.y)/2 });
+                        const M_ab = mid(P.A, P.B), N_ac = mid(P.A, P.C);
+                        const G = { x: (P.A.x + P.B.x + P.C.x)/3, y: (P.A.y + P.B.y + P.C.y)/3 };
+
+                        ctx.setLineDash([4, 3]);
+                        ctx.strokeStyle = '#f59e0b';
+                        ctx.lineWidth = 1.6;
+                        ctx.beginPath(); ctx.moveTo(P.B.x, P.B.y); ctx.lineTo(N_ac.x, N_ac.y); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(P.C.x, P.C.y); ctx.lineTo(M_ab.x, M_ab.y); ctx.stroke();
+                        ctx.strokeStyle = '#10b981';
+                        ctx.beginPath(); ctx.moveTo(P.S.x, P.S.y); ctx.lineTo(G.x, G.y); ctx.stroke();
+                        ctx.setLineDash([]);
+
+                        ctx.fillStyle = '#ef4444';
+                        ctx.beginPath(); ctx.arc(G.x, G.y, 4, 0, Math.PI * 2); ctx.fill();
+                        ctx.font = 'bold 11px "Be Vietnam Pro"';
+                        ctx.fillText('G', G.x + 5, G.y + 10);
+                    }
+
+                    if (showSection) {
+                        const lerp = (p1, p2, t) => ({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
+                        const M = lerp(P.S, P.A, k), N = lerp(P.S, P.B, k), Q = lerp(P.S, P.C, k);
+                        ctx.fillStyle = 'rgba(16, 185, 129, 0.25)';
+                        ctx.beginPath(); ctx.moveTo(M.x, M.y); ctx.lineTo(N.x, N.y); ctx.lineTo(Q.x, Q.y); ctx.closePath(); ctx.fill();
+                        ctx.strokeStyle = '#10b981'; ctx.lineWidth = 2; ctx.stroke();
+                    }
+
+                    ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+                    ctx.font = 'bold 13px "Be Vietnam Pro"';
+                    ctx.fillText('S', P.S.x - 4, P.S.y - 8);
+                    ctx.fillText('A', P.A.x - 14, P.A.y);
+                    ctx.fillText('B', P.B.x - 4, P.B.y + 15);
+                    ctx.fillText('C', P.C.x + 6, P.C.y);
+
+                    metricsBox.innerHTML = `
+                        <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Tứ diện: <strong>4 đỉnh, 6 cạnh</strong></div>
+                        <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400">Giao tuyến (SBN)∩(SCM) = <strong>SG</strong></div>
+                    `;
+                } 
+                else {
+                    // Hình hộp ABCD.A'B'C'D' (Bài 13 & 14)
+                    const slant = 0.35;
+                    const pts3D = {
+                        A: [-0.75, 0, -0.65], B: [0.75, 0, -0.65], C: [0.75, 0, 0.65], D: [-0.75, 0, 0.65],
+                        A1: [-0.75 + slant, 1.35, -0.65], B1: [0.75 + slant, 1.35, -0.65], C1: [0.75 + slant, 1.35, 0.65], D1: [-0.75 + slant, 1.35, 0.65]
+                    };
+                    const P = {};
+                    Object.keys(pts3D).forEach(key => P[key] = project(...pts3D[key]));
+
+                    const baseKeys = ['A', 'B', 'C', 'D'];
+                    let hiddenVertex = 'A';
+                    baseKeys.forEach(key => { if (P[key].z < P[hiddenVertex].z) hiddenVertex = key; });
+
+                    const edges = [
+                        ['A','B'], ['B','C'], ['C','D'], ['D','A'],
+                        ['A1','B1'], ['B1','C1'], ['C1','D1'], ['D1','A1'],
+                        ['A','A1'], ['B','B1'], ['C','C1'], ['D','D1']
+                    ];
+                    edges.forEach(([u, v]) => {
+                        const isHidden = (u === hiddenVertex || v === hiddenVertex);
+                        ctx.beginPath();
+                        if (isHidden) {
+                            ctx.setLineDash([5, 5]);
+                            ctx.strokeStyle = isDark ? '#64748b' : '#94a3b8';
+                            ctx.lineWidth = 1.6;
+                        } else {
+                            ctx.setLineDash([]);
+                            ctx.strokeStyle = isDark ? '#60a5fa' : '#2563eb';
+                            ctx.lineWidth = 2.2;
+                        }
+                        ctx.moveTo(P[u].x, P[u].y); ctx.lineTo(P[v].x, P[v].y); ctx.stroke();
+                    });
+                    ctx.setLineDash([]);
+
+                    if (showSection) {
+                        const diags = [['A','C1'], ['B','D1'], ['C','A1'], ['D','B1']];
+                        ctx.setLineDash([3, 3]);
+                        ctx.strokeStyle = '#f59e0b';
+                        ctx.lineWidth = 1.5;
+                        diags.forEach(([u, v]) => {
+                            ctx.beginPath(); ctx.moveTo(P[u].x, P[u].y); ctx.lineTo(P[v].x, P[v].y); ctx.stroke();
+                        });
+                        ctx.setLineDash([]);
+
+                        const O = { x: (P.A.x + P.C1.x) / 2, y: (P.A.y + P.C1.y) / 2 };
+                        ctx.fillStyle = '#ef4444';
+                        ctx.beginPath(); ctx.arc(O.x, O.y, 4.5, 0, Math.PI * 2); ctx.fill();
+                        ctx.fillText('O', O.x + 6, O.y - 4);
+                    }
+
+                    ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+                    ctx.font = 'bold 12px "Be Vietnam Pro"';
+                    ctx.fillText('A', P.A.x - 13, P.A.y + 4);
+                    ctx.fillText('B', P.B.x + 5, P.B.y + 4);
+                    ctx.fillText('C', P.C.x + 5, P.C.y + 10);
+                    ctx.fillText('D', P.D.x - 13, P.D.y + 10);
+                    ctx.fillText("A'", P.A1.x - 15, P.A1.y - 4);
+                    ctx.fillText("B'", P.B1.x + 5, P.B1.y - 4);
+                    ctx.fillText("C'", P.C1.x + 5, P.C1.y - 4);
+                    ctx.fillText("D'", P.D1.x - 15, P.D1.y - 4);
+
+                    metricsBox.innerHTML = `
+                        <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Mặt đối diện: <strong>Song song</strong></div>
+                        <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400"><strong>4 đường chéo đồng quy tại O</strong></div>
+                    `;
+                }
             }
-            else if (canvasState.mode === 'solid-revolution') {
-                const ox = w * 0.18, oy = h * 0.5, scaleX = w * 0.16, scaleY = h * 0.16;
-                const bVal = Math.max(0.5, Math.min(4.2, (canvasState.points[0].x - ox) / scaleX));
-                canvasState.points[0].x = ox + bVal * scaleX;
-                canvasState.points[0].y = oy;
 
-                // Trục Ox, Oy
+            // ------------------------------------------
+            // CHẾ ĐỘ 5: LỚP 12 - MẶT CẦU (S) & ĐIỂM M TRONG KHÔNG GIAN OXYZ
+            // ------------------------------------------
+            else if (simState.mode === 'oxyz-sphere') {
+                const { x0, y0, z0, R, xm, ym, zm, yaw, pitch } = simState.sphere;
+                const imDist = Math.hypot(xm - x0, ym - y0, zm - z0);
+                const maxExtent = Math.max(6, Math.abs(x0) + R, Math.abs(y0) + R, Math.abs(z0) + R, Math.abs(xm), Math.abs(ym), Math.abs(zm)) + 1.5;
+
+                const cx = w * 0.5, cy = h * 0.54;
+                const scale = (w * 0.42) / maxExtent;
+
+                // Chiếu hệ trục Oxyz (x hướng ra trước-trái, y sang phải, z lên trên)
+                const projectOxyz = (x, y, z) => {
+                    const rx = y * Math.cos(yaw) - x * Math.sin(yaw);
+                    const rz = y * Math.sin(yaw) + x * Math.cos(yaw);
+                    return {
+                        x: cx + rx * scale,
+                        y: cy - z * scale + rz * scale * pitch
+                    };
+                };
+
+                const O = projectOxyz(0, 0, 0);
+                const axX = projectOxyz(maxExtent * 0.9, 0, 0);
+                const axY = projectOxyz(0, maxExtent * 0.9, 0);
+                const axZ = projectOxyz(0, 0, maxExtent * 0.9);
+
+                // Vẽ 3 trục Ox, Oy, Oz
                 ctx.strokeStyle = isDark ? '#94a3b8' : '#475569';
-                ctx.lineWidth = 1.5;
-                ctx.beginPath(); ctx.moveTo(15, oy); ctx.lineTo(w - 15, oy); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(ox, 15); ctx.lineTo(ox, h - 15); ctx.stroke();
+                ctx.lineWidth = 1.6;
+                [[axX, 'x'], [axY, 'y'], [axZ, 'z']].forEach(([pt, lbl]) => {
+                    ctx.beginPath(); ctx.moveTo(O.x, O.y); ctx.lineTo(pt.x, pt.y); ctx.stroke();
+                    ctx.fillStyle = isDark ? '#cbd5e1' : '#334155';
+                    ctx.font = 'bold 12px "JetBrains Mono"';
+                    ctx.fillText(lbl, pt.x + 5, pt.y + 4);
+                });
+                ctx.fillText('O', O.x - 14, O.y + 12);
 
-                // Tô miền tròn xoay đối xứng qua Ox cho y = sqrt(x)
-                ctx.fillStyle = 'rgba(244, 63, 94, 0.18)';
-                ctx.beginPath();
-                ctx.moveTo(ox, oy);
-                for (let x = 0; x <= bVal; x += 0.05) {
-                    ctx.lineTo(ox + x * scaleX, oy - Math.sqrt(x) * scaleY);
-                }
-                for (let x = bVal; x >= 0; x -= 0.05) {
-                    ctx.lineTo(ox + x * scaleX, oy + Math.sqrt(x) * scaleY);
-                }
-                ctx.closePath();
-                ctx.fill();
+                const pI = projectOxyz(x0, y0, z0);
+                const pM = projectOxyz(xm, ym, zm);
+                const rPx = R * scale;
 
-                // Vẽ đường cong y = sqrt(x)
+                // Vẽ mặt cầu (S) tâm I bán kính R
+                const grad = ctx.createRadialGradient(pI.x - rPx * 0.25, pI.y - rPx * 0.25, rPx * 0.1, pI.x, pI.y, rPx);
+                grad.addColorStop(0, 'rgba(244, 63, 94, 0.35)');
+                grad.addColorStop(1, 'rgba(244, 63, 94, 0.08)');
+                ctx.fillStyle = grad;
+                ctx.beginPath(); ctx.arc(pI.x, pI.y, rPx, 0, Math.PI * 2); ctx.fill();
+
                 ctx.strokeStyle = '#f43f5e';
-                ctx.lineWidth = 2.5;
-                ctx.beginPath();
-                for (let x = 0; x <= 4.3; x += 0.05) {
-                    const px = ox + x * scaleX;
-                    const py = oy - Math.sqrt(x) * scaleY;
-                    if (x === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-                }
-                ctx.stroke();
+                ctx.lineWidth = 2.2;
+                ctx.beginPath(); ctx.arc(pI.x, pI.y, rPx, 0, Math.PI * 2); ctx.stroke();
 
-                const vol = Math.PI * (bVal * bVal) / 2;
+                // Vẽ đường xích đạo elip của mặt cầu để tạo chiều sâu 3D
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = 'rgba(244, 63, 94, 0.6)';
+                ctx.lineWidth = 1.4;
+                ctx.beginPath();
+                ctx.ellipse(pI.x, pI.y, rPx, rPx * 0.32, 0, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Đoạn thẳng nối IM
+                ctx.strokeStyle = '#3b82f6';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(pI.x, pI.y); ctx.lineTo(pM.x, pM.y); ctx.stroke();
+
+                // Điểm I và điểm M
+                ctx.fillStyle = '#f43f5e';
+                ctx.beginPath(); ctx.arc(pI.x, pI.y, 5, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+                ctx.font = 'bold 12px "Be Vietnam Pro"';
+                ctx.fillText(`I(${x0};${y0};${z0})`, pI.x + 7, pI.y - 5);
+
+                ctx.fillStyle = '#3b82f6';
+                ctx.beginPath(); ctx.arc(pM.x, pM.y, 5.5, 0, Math.PI * 2); ctx.fill();
+                ctx.fillText(`M(${xm};${ym};${zm})`, pM.x + 7, pM.y + 12);
+
+                let relText = "Nằm TRÊN mặt cầu (IM = R)";
+                let relColor = "text-emerald-600 dark:text-emerald-400";
+                if (imDist < R - 1e-4) {
+                    relText = "Nằm TRONG mặt cầu (IM < R)";
+                    relColor = "text-amber-600 dark:text-amber-400";
+                } else if (imDist > R + 1e-4) {
+                    relText = "Nằm NGOÀI mặt cầu (IM > R)";
+                    relColor = "text-rose-600 dark:text-rose-400";
+                }
+
                 metricsBox.innerHTML = `
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Cận b = <strong>${bVal.toFixed(2)}</strong></div>
-                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 text-rose-600 dark:text-rose-400">V = <strong>${vol.toFixed(2)}</strong> đvtt</div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Khoảng cách IM = <strong>${imDist.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900">Bán kính R = <strong>${R.toFixed(2)}</strong></div>
+                    <div class="p-2 rounded-lg bg-white dark:bg-slate-900 col-span-2 ${relColor}">Vị trí M: <strong>${relText}</strong></div>
                 `;
             }
-
-            // Vẽ các điểm điều khiển (Control Points)
-            canvasState.points.forEach(p => {
-                ctx.fillStyle = p.color;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.fixed ? 5 : 8, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.strokeStyle = '#ffffff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
-                ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
-                ctx.font = 'bold 12px Inter';
-                ctx.fillText(p.label, p.x + 10, p.y - 8);
-            });
         }
 
-        function drawArrow(ctx, fromX, fromY, toX, toY, color) {
-            const headlen = 10;
-            const angle = Math.atan2(toY - fromY, toX - fromX);
-            ctx.strokeStyle = color;
-            ctx.fillStyle = color;
-            ctx.lineWidth = 2.5;
-            ctx.beginPath(); ctx.moveTo(fromX, fromY); ctx.lineTo(toX, toY); ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(toX, toY);
-            ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
-            ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
-            ctx.closePath();
-            ctx.fill();
-        }
+        // ==========================================
+        // TƯƠNG TÁC KÉO THẢ CHUỘT / CẢM ỨNG TRÊN CANVAS
+        // ==========================================
+        let isDragging = false, lastX = 0, lastY = 0;
 
-        // Xử lý sự kiện chuột & cảm ứng trên Canvas
         function getPointerPos(e) {
             const rect = canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
             const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return { x: clientX - rect.left, y: clientY - rect.top };
+            return { x: clientX - rect.left, y: clientY - rect.top, w: rect.width, h: rect.height };
         }
 
-        let lastDragX = 0;
-        function handlePointerDown(e) {
+        canvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
             const pos = getPointerPos(e);
-            lastDragX = pos.x;
-            if (canvasState.mode === 'pyramid3d') {
-                canvasState.draggingIdx = 99;
-                return;
-            }
-            canvasState.points.forEach((p, idx) => {
-                if (!p.fixed && Math.hypot(p.x - pos.x, p.y - pos.y) < 22) {
-                    canvasState.draggingIdx = idx;
-                }
-            });
-        }
-
-        function handlePointerMove(e) {
-            if (canvasState.draggingIdx === -1) return;
+            lastX = pos.x; lastY = pos.y;
+        });
+        canvas.addEventListener('touchstart', (e) => {
+            isDragging = true;
             const pos = getPointerPos(e);
-            const rect = canvas.getBoundingClientRect();
+            lastX = pos.x; lastY = pos.y;
+        }, { passive: true });
 
-            if (canvasState.mode === 'pyramid3d') {
-                canvasState.rotAngle += (pos.x - lastDragX) * 0.015;
-                lastDragX = pos.x;
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const pos = getPointerPos(e);
+            if (simState.mode === 'space3d') {
+                simState.space3d.yaw += (pos.x - lastX) * 0.015;
+                simState.space3d.pitch = Math.max(0.1, Math.min(1.1, simState.space3d.pitch + (pos.y - lastY) * 0.008));
                 drawCanvas();
-                return;
+            } else if (simState.mode === 'oxyz-sphere') {
+                simState.sphere.yaw += (pos.x - lastX) * 0.015;
+                simState.sphere.pitch = Math.max(0.1, Math.min(1.0, simState.sphere.pitch + (pos.y - lastY) * 0.008));
+                drawCanvas();
+            } else if (simState.mode === 'circle-solver') {
+                const cx = pos.w * 0.48, cy = pos.h * 0.52;
+                simState.circle.cAngle = Math.atan2(pos.y - cy, pos.x - cx);
+                drawCanvas();
             }
+            lastX = pos.x; lastY = pos.y;
+        });
 
-            const p = canvasState.points[canvasState.draggingIdx];
-            if (p.onCircle) {
-                const cx = rect.width * 0.5, cy = rect.height * 0.5, R = rect.width * 0.32;
-                const ang = Math.atan2(pos.y - cy, pos.x - cx);
-                p.x = cx + R * Math.cos(ang);
-                p.y = cy + R * Math.sin(ang);
-            } else {
-                if (!p.lockX) p.x = Math.max(20, Math.min(rect.width - 20, pos.x));
-                if (!p.lockY) p.y = Math.max(20, Math.min(rect.height - 20, pos.y));
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const pos = getPointerPos(e);
+            if (simState.mode === 'space3d') {
+                simState.space3d.yaw += (pos.x - lastX) * 0.015;
+                simState.space3d.pitch = Math.max(0.1, Math.min(1.1, simState.space3d.pitch + (pos.y - lastY) * 0.008));
+                drawCanvas();
+            } else if (simState.mode === 'oxyz-sphere') {
+                simState.sphere.yaw += (pos.x - lastX) * 0.015;
+                simState.sphere.pitch = Math.max(0.1, Math.min(1.0, simState.sphere.pitch + (pos.y - lastY) * 0.008));
+                drawCanvas();
             }
+            lastX = pos.x; lastY = pos.y;
+        }, { passive: true });
+
+        window.addEventListener('mouseup', () => { isDragging = false; });
+        window.addEventListener('touchend', () => { isDragging = false; });
+
+        // Nút Reset dữ liệu đề bài về mặc định
+        document.getElementById('reset-canvas-btn').onclick = () => {
+            simState.tri = { a: 10, b: 8, c: 6 };
+            simState.circle = { R: 6, alpha: 90, cAngle: -Math.PI * 0.75 };
+            simState.oxy = { ax: 1, ay: 1, bx: 5, by: 1, cx: 2, cy: 5 };
+            simState.space3d.k = 0.5;
+            simState.space3d.yaw = 0.55;
+            simState.space3d.pitch = 0.38;
+            simState.sphere = { x0: 1, y0: -2, z0: 2, R: 5, xm: 4, ym: 2, zm: 2, yaw: 0.6, pitch: 0.35 };
+            renderInputPanel(simState.mode);
             drawCanvas();
-        }
-
-        function handlePointerUp() {
-            canvasState.draggingIdx = -1;
-        }
-
-        canvas.addEventListener('mousedown', handlePointerDown);
-        window.addEventListener('mousemove', handlePointerMove);
-        window.addEventListener('mouseup', handlePointerUp);
-        canvas.addEventListener('touchstart', handlePointerDown, { passive: true });
-        window.addEventListener('touchmove', handlePointerMove, { passive: true });
-        window.addEventListener('touchend', handlePointerUp);
-
-        document.getElementById('reset-canvas-btn').onclick = () => initCanvasMode(currentTopic.canvasMode);
+        };
 
         // ==========================================
         // CHỨC NĂNG GIAO DIỆN: DARK MODE, TRÌNH CHIẾU, COPY
@@ -1244,15 +1922,13 @@
             drawCanvas();
         };
 
-        const presentationBtn = document.getElementById('presentation-btn');
-        presentationBtn.onclick = () => {
+        document.getElementById('presentation-btn').onclick = () => {
             document.body.classList.toggle('presentation-mode');
             const isPres = document.body.classList.contains('presentation-mode');
             document.getElementById('presentation-label').textContent = isPres ? 'Thoát trình chiếu' : 'Trình chiếu';
             setTimeout(resizeCanvas, 50);
         };
 
-        // Sao chép mã LaTeX bằng document.execCommand('copy')
         document.getElementById('copy-formulas-btn').onclick = () => {
             const tempInput = document.createElement('textarea');
             tempInput.value = currentTopic.latexRaw;
@@ -1266,7 +1942,6 @@
             setTimeout(() => { statusEl.textContent = 'Chép LaTeX'; }, 1800);
         };
 
-        // Mobile sidebar toggle
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
         function toggleMobileSidebar(forceState) {
@@ -1277,10 +1952,10 @@
         document.getElementById('mobile-menu-btn').onclick = () => toggleMobileSidebar();
         overlay.onclick = () => toggleMobileSidebar(false);
 
-        // Khởi tạo ứng dụng khi tải xong
+        // Khởi tạo ứng dụng
         window.addEventListener('resize', resizeCanvas);
         window.onload = () => {
-            selectTopic(curriculumData[2].topics[0], "Lớp 8");
+            selectTopic(curriculumData[3].topics[0], "Lớp 11");
             resizeCanvas();
         };
     </script>
